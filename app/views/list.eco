@@ -1,0 +1,4 @@
+<img src="<%= @media %>">
+<p>
+  <%= @text %>
+</p>

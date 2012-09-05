@@ -1,0 +1,39 @@
+<form>
+
+    <label><input type="checkbox" name="1" id="1"> 
+    Clothing, Accessories & Beauty</label>
+    <br>
+
+    <label><input type="checkbox" name="2" id="2"> 
+    Interior Design</label>
+    <br>
+
+    <label><input type="checkbox" name="3" id="3"> 
+    Consumer Electronics</label>
+    <br>
+
+    <label><input type="checkbox" name="4" id="4"> 
+    Home & Major Appliances</label>
+    <br>
+
+    <label><input type="checkbox" name="5" id="5"> 
+    Music, Books & Media</label>
+    <br>
+
+    <label><input type="checkbox" name="6" id="6"> 
+    Hobbies</label>
+    <br>
+
+    <label><input type="checkbox" name="7" id="7"> 
+    Construction & Garden</label>
+    <br>
+
+    <label><input type="checkbox" name="8" id="8"> 
+    Art, Antiques & DIY</label>
+    <br>
+
+    <label><input type="checkbox" name="9" id="9"> 
+    Everything Else</label>
+    <br>
+
+</form>
