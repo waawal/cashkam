@@ -1,5 +1,6 @@
 <form>
-
+    <button>Search</button>
+    <p>
     <label><input type="checkbox" name="1" id="1"> 
     Clothing, Accessories & Beauty</label>
     <br>
@@ -34,6 +35,6 @@
 
     <label><input type="checkbox" name="9" id="9"> 
     Everything Else</label>
-    <br>
+    </p>
 
 </form>

@@ -1,9 +1,6 @@
 Spine = require('spine')
 L = require ('lib/leaflet')
 require('lib/jquery-ui')
-#$ = "lib/jq"
-
-
 
 class Map extends Spine.Controller
   #className: "side-map"
@@ -11,15 +8,15 @@ class Map extends Spine.Controller
     '#map': 'mapbox'
     '#meters': 'meters'
     '#slider': 'slider'
+    '#search': 'search'
 
   constructor: ->
     super
-    @meters.hide()
-    @meters.html "Distance"
+    #@meters.css("visibility", "hidden")
+    @meters.html "100 km"
+    @search.html '<input type="search" placeholder="search" results="0" incremental="true">'
     
-
     @map = new @createMap
-    
 
     @slider.html "" # or else the slider wont be able to init
     $(@slider).slider
@@ -34,8 +31,7 @@ class Map extends Spine.Controller
         @map.fitBounds(@circle.getBounds())
         @updateMeasure()
     
-
-    @append @slider, @mapbox, @meters
+    @append @search, @mapbox, @meters, @slider
 
 
   createMap: =>
@@ -55,15 +51,15 @@ class Map extends Spine.Controller
         updateWhenIdle: true
     ).addTo(map)
     # Full screen
-    fullScreen = new L.Control.FullScreen()
-    map.addControl(fullScreen)
+    #fullScreen = new L.Control.FullScreen()
+    #map.addControl(fullScreen)
 
     @circle = L.circle([0,0], 99500,
-      fillOpacity: 0.25
+      fillOpacity: 0.3
       fillColor: "#fff"
       #stroke: false
-      weight: 5
-      opacity: 0.3
+      weight: 3
+      opacity: 0.35
       color: 'black'
       clickable: false
       ).addTo(map)
@@ -84,12 +80,13 @@ class Map extends Spine.Controller
       @circle.setLatLng(e.latlng)
       )
 
-    map.on('exitFullscreen', (e) =>
-      map.fitBounds(@circle.getBounds())
-      )
+    #map.on 'exitFullscreen', (e) =>
+    #  @delay((-> @map.fitBounds(@circle.getBounds())), 1000)
 
-    map.on('viewreset', @updateMeasure)
+    map.on 'viewreset', (e) =>
+      @updateMeasure
     map
+
 
   updateMeasure: =>
     distance = @circle.getRadius()
@@ -101,5 +98,6 @@ class Map extends Spine.Controller
 
     @meters.html "#{distance} #{unit}"
     @meters.show()
+
 
 module.exports = Map
