@@ -37,17 +37,30 @@ class Ads extends Spine.Controller
       'http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-light/{z}/{x}/{y}.png',
         maxZoom: 18
         attributionControl: false
+        updateWhenIdle: true
     ).addTo(@map)
     # Full screen
-    fullScreen = new L.Control.FullScreen()
-    @map.addControl(fullScreen)
+    #fullScreen = new L.Control.FullScreen()
+    #@map.addControl(fullScreen)
 
     @map.locate(
       setView: true
       maxZoom: 13
       enableHighAccuracy: true
       )
+    @map.on('locationfound', (e) =>
+      @circle = L.circle(e.latlng, 1000,
+      fillOpacity: 0.3
+      #stroke: false
+      weight: 3
+      opacity: 0.8
+      color: '#fff'
+      draggable: true
+      )
+      @circle.addTo(@map)
+      )
 
+    
 
     # temp
     @map.on('click', (e) =>
