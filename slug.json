@@ -2,7 +2,8 @@
   "dependencies": [
     "es5-shimify", 
     "json2ify", 
-    "jqueryify", 
+    "jqueryify",
+    "jquery.ui.slider",
     "spine",
     "spine/lib/local",
     "spine/lib/ajax",

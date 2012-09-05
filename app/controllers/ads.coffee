@@ -15,21 +15,24 @@ class Ads extends Spine.Controller
   constructor: ->
     super
     
+    @meters.hide()
     @meters.html "Distance"
 
     @map = L.map('map',
       center: [51.505, -0.09]
       zoom: 12
-      maxZoom: 15
+      maxZoom: 14
       minZoom: 5
       attributionControl: false
       )
 
     @setupMap()
-
+    #@mapbox.hide()
+    
     @categories = new Categories(el: $("#categories"))
     @append @mapbox, @meters, @categories
-    @delay(@updateMeasure,1000) # sleep before initial - on.'load' malfunctions.
+    #@mapbox.fadeIn(1600)
+    #@delay(@updateMeasure,1000) # sleep before initial - on.'load' malfunctions.
 
   setupMap: =>
     # Raster tiles
@@ -43,36 +46,44 @@ class Ads extends Spine.Controller
     #fullScreen = new L.Control.FullScreen()
     #@map.addControl(fullScreen)
 
+    @circle = L.circle([0,0], 1000,
+      fillOpacity: 0.25
+      fillColor: "#fff"
+      #stroke: false
+      weight: 5
+      opacity: 0.3
+      color: 'black'
+      clickable: false
+      ).addTo(@map)
+
     @map.locate(
       setView: true
       maxZoom: 13
       enableHighAccuracy: true
       )
     @map.on('locationfound', (e) =>
-      @circle = L.circle(e.latlng, 1000,
-      fillOpacity: 0.3
-      #stroke: false
-      weight: 3
-      opacity: 0.8
-      color: '#fff'
-      draggable: true
+      @circle.setLatLng(e.latlng)
       )
-      @circle.addTo(@map)
+
+
+    @map.on('click', (e) =>
+      @map.panTo(e.latlng)
+      @circle.setLatLng(e.latlng)
       )
 
     
 
     # temp
-    @map.on('click', (e) =>
-      boundingBox = @map.getBounds()
-      @queryForAds(e, boundingBox)
-      )
+    #@map.on('click', (e) =>
+    #  boundingBox = @map.getBounds()
+    #  @queryForAds(e, boundingBox)
+    #  )
 
     @map.on('viewreset', @updateMeasure)
 
   updateMeasure: =>
-    bBox = @map.getBounds()
-    distance = Math.round(bBox['_southWest'].distanceTo(bBox['_northEast'])/100)*100
+    
+    distance = @circle.getRadius()
     if distance >= 1000
       distance = (Math.round(distance / 100) / 10).toFixed(0)
       unit = "km"
@@ -81,6 +92,7 @@ class Ads extends Spine.Controller
 
     #Spine.$(@meters).slideUp(60)
     @meters.html "#{distance} #{unit}"
+    @meters.show()
     #Spine.$(@meters).slideDown(180)
 
 

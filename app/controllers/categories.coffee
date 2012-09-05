@@ -11,7 +11,9 @@ class Categories extends Spine.Controller
   constructor: ->
     super
     @status = {}
+    @el.hide()
     @html require('views/categories')()
+    @el.fadeIn(800)
 
   change: (e) =>
     @status[e.target.id] = e.target.checked
