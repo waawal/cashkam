@@ -20,29 +20,31 @@ class Map extends Spine.Controller
     @map = new @createMap
 
     @slider.html "" # or else the slider wont be able to init
-    $(@slider).slider
+    @slider = $(@slider).slider
       orientation: "horizontal"
-      range: "min"
-      min: 100
-      max: 99500
-      step: 100
-      value: 100
+      #range: "min"
+      min: 500
+      max: 100000
+      step: 500
+      value: 80000
       slide: (event, ui) =>
         weight = 100000
-        @circle.setRadius(weight - ui.value)
-        
+        rad = (weight-ui.value) or 500
+        @circle.setRadius(rad)
         @updateMeasure()
       stop: (event, ui) =>
-        zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
-        @map.setZoom((zoomAmount - 2))
-        #@map.fitBounds(@circle.getBounds()).zoomOut()
+        zoomAmount = (@map.getBoundsZoom(@circle.getBounds(), true))-2
+        #@log (zoomAmount is @map.getZoom()) # ->(inside = true)
+        unless @map.getZoom() is zoomAmount # only set center and zoom if needed
+          @map.panTo(@circle.getLatLng())
+          @map.setZoom(zoomAmount)
     
     @append @search, @mapbox, @meters, @slider
 
 
   createMap: =>
     map = L.map('map',
-      center: [51.505, -0.09]
+      center: [59.712097173322924, 17.9296875]
       zoom: 12
       #maxZoom: 13
       minZoom: 3
@@ -62,7 +64,7 @@ class Map extends Spine.Controller
     #fullScreen = new L.Control.FullScreen()
     #map.addControl(fullScreen)
 
-    @circle = L.circle([0,0], 99500,
+    @circle = L.circle([0,0], 20000,
       fillOpacity: 0.3
       fillColor: "#fff"
       #stroke: false
@@ -82,6 +84,7 @@ class Map extends Spine.Controller
       @circle.setLatLng(e.latlng)
       zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
       @map.setZoom((zoomAmount - 3))
+      @updateMeasure()
       #@map.fitBounds(@circle.getBounds())
       )
 

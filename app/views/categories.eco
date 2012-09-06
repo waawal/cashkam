@@ -1,5 +1,5 @@
 <form>
-    <button>Search</button>
+    <button>Browse</button>
     <p>
     <label><input type="checkbox" name="1" id="1"> 
     Clothing, Accessories & Beauty</label>

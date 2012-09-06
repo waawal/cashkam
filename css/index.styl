@@ -2,7 +2,7 @@
 @import './jqueryui'
 @import '../node_modules/nib/lib/nib'
 
-@import 'Karla:400:700.css'
+@import './Karla:400:700'
 
 html body
   margin 0
@@ -17,7 +17,7 @@ body
   background #f6f6f6
   background-image url('data:image/pngbase64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC')
   font-family "Karla", sans-serif
-  font-weight 700
+  font-weight 400
   //font-family "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important
 
 #map
@@ -31,8 +31,10 @@ body
   //position absolute
   relative left 0px
   column-count 4
+  column-span 1
   width 640px
   margin-left 20px
+  
   //left 280px
   //top 40px
 
@@ -45,11 +47,12 @@ body
 
 
 #wrapper
-  absolute top left
+  absolute top 40px bottom 40px
+
 
 
 #sidebar
-  relative left 40px top 40px
+  relative left 40px
   width 240px
   //margin-left 40px
   //margin-top 40px
@@ -57,7 +60,7 @@ body
   button
     width 100%
     height 32px
-    font-weight 400
+    font-weight 700
     //border-radius top 3px
   input[type=search]
     width 100%
