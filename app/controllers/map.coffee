@@ -33,7 +33,9 @@ class Map extends Spine.Controller
         
         @updateMeasure()
       stop: (event, ui) =>
-        @map.fitBounds(@circle.getBounds()).zoomOut()
+        zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
+        @map.setZoom((zoomAmount - 2))
+        #@map.fitBounds(@circle.getBounds()).zoomOut()
     
     @append @search, @mapbox, @meters, @slider
 
@@ -42,7 +44,7 @@ class Map extends Spine.Controller
     map = L.map('map',
       center: [51.505, -0.09]
       zoom: 12
-      maxZoom: 13
+      #maxZoom: 13
       minZoom: 3
       attributionControl: false
       zoomControl: false
@@ -79,7 +81,7 @@ class Map extends Spine.Controller
     map.on('locationfound', (e) =>
       @circle.setLatLng(e.latlng)
       zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
-      @map.setZoom(zoomAmount)
+      @map.setZoom((zoomAmount - 3))
       #@map.fitBounds(@circle.getBounds())
       )
 
