@@ -15,6 +15,7 @@ class Map extends Spine.Controller
     #@meters.css("visibility", "hidden")
     @meters.html "100 km"
     @search.html '<input type="search" placeholder="search" results="0" incremental="true">'
+    @searchfield = $('#search input')
     
     @map = new @createMap
 
@@ -27,9 +28,12 @@ class Map extends Spine.Controller
       step: 100
       value: 100
       slide: (event, ui) =>
-        @circle.setRadius(100000 - ui.value)
-        @map.fitBounds(@circle.getBounds())
+        weight = 100000
+        @circle.setRadius(weight - ui.value)
+        
         @updateMeasure()
+      stop: (event, ui) =>
+        @map.fitBounds(@circle.getBounds()).zoomOut()
     
     @append @search, @mapbox, @meters, @slider
 
@@ -38,9 +42,11 @@ class Map extends Spine.Controller
     map = L.map('map',
       center: [51.505, -0.09]
       zoom: 12
-      maxZoom: 14
-      minZoom: 5
+      maxZoom: 13
+      minZoom: 3
       attributionControl: false
+      zoomControl: false
+      doubleClickZoom: false
       )
 
     # Raster tiles
@@ -72,7 +78,9 @@ class Map extends Spine.Controller
 
     map.on('locationfound', (e) =>
       @circle.setLatLng(e.latlng)
-      @map.fitBounds(@circle.getBounds())
+      zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
+      @map.setZoom(zoomAmount)
+      #@map.fitBounds(@circle.getBounds())
       )
 
     map.on('click', (e) =>

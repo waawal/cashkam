@@ -19,6 +19,7 @@ class Ads extends Spine.Controller
   queryForAds: =>
     latlng = @map.circle.getLatLng()
     radius = @map.circle.getRadius()
+    search = @map.searchfield.val()
 
     data =
       lat: latlng['lat']
@@ -29,6 +30,7 @@ class Ads extends Spine.Controller
       #swLat: boundingBox['_southWest']['lat']
       #swLng: boundingBox['_southWest']['lng']
       categories: @categories.represent()
+      search: search
 
     Ad.fetch(
       processData:true
