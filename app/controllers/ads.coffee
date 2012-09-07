@@ -15,14 +15,14 @@ class Ads extends Spine.Controller
     @categories = new Categories(el: $("#categories"))
     @categories.bind "search", @queryForAds
     @map.bind "initialLocation", @queryForAds
-    @categories.bind "new", @createAd
+    @map.bind "new", @createAd
     @append @map, @categories
 
 
   getData: =>
     latlng = @map.circle.getLatLng()
     radius = @map.circle.getRadius()
-    q = @map.searchfield.val()
+    q = @categories.searchfield.val()
     data =
       lat: latlng['lat']
       lng: latlng['lng']

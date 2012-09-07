@@ -1,23 +1,39 @@
+
+
 import os
 import json
 from pprint import pprint
+
+
+from gevent import monkey; monkey.patch_all()
+
 from bottle import hook, request, response, route, run, get, post, put
+
 import geomongo
+
+### CORS Implementation
 
 @hook('after_request')
 def enable_cors():
+    """ Appends CORS-related data to response headers """
+    headers = 'origin, accept, Content-Type, X-Requested-With, X-CSRF-Token'
     response.content_type = "application/json"
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'
-    response.headers['Access-Control-Allow-Headers'] = 'origin, accept, Content-Type,\
-                                                         X-Requested-With, X-CSRF-Token'
+    response.headers['Access-Control-Allow-Headers'] = headers
     response['Access-Control-Max-Age'] = '180'
     response.headers['Access-Control-Allow-Origin'] = '*'
 
 
-@route('/ads', method=['GET', 'HEAD', 'OPTIONS'])
+@route('/ads', method='OPTIONS')
+def cors_options():
+    """ Answers the CORS-preflight request"""
+    return " "
+
+###
+
+@get('/ads')
 def get_ads():
-    if request.method == "OPTIONS":
-        return ""
+    #enable_cors()
 
     dbrequest = {}
     dbrequest['lat'] = float(request.query.get('lat'))
@@ -29,24 +45,17 @@ def get_ads():
     dbanswer = geomongo.get_ads(**dbrequest)
     return json.dumps(dbanswer)
 
-
 @post('/ads')
 def post_ad():
-    if request.method == "OPTIONS":
-        return ""
-
+    #enable_cors()
     dbrequest = json.loads(request.params.keys()[0])
     del dbrequest['id']
     dbanswer = geomongo.post_ad(**dbrequest)
     return json.dumps(dbanswer)
 
-
 @get('/ads/:id')
 def get_ad(id):
     return id
 
-@route('/bar')
-def say_bar():
-    return {'type': 'friendly', 'content': 'Hi!'}
 
-run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+run(host='192.168.0.224', port=int(os.environ.get("PORT", 8080)), server='gevent')

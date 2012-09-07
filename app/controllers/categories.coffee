@@ -7,12 +7,13 @@ class Categories extends Spine.Controller
 
   elements:
     "form": "formElement"
+    'input[type=search]': 'searchfield'
 
 
   events: 
     "change input[type=checkbox]": "change"
     "click #browse": "search"
-    "click #create": "create"
+    
 
 
   constructor: ->
@@ -39,9 +40,7 @@ class Categories extends Spine.Controller
     e.preventDefault()
     @trigger "search"
 
-  create: (e) =>
-    e.preventDefault()
-    @trigger "new"
+  
 
 
 module.exports = Categories

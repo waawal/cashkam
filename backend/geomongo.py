@@ -1,5 +1,6 @@
 from pprint import pprint
 
+from gevent import monkey; monkey.patch_all()
 from pymongo import Connection, GEO2D
 from bson.son import SON
 db = Connection().geo_example

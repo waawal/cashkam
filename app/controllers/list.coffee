@@ -30,7 +30,9 @@ class List extends Spine.Controller
 
   addOne: (item) =>
     if item
-      #@ads.wookmarkClear() if @ads
+      if @ads
+        @ads.wookmarkClear()
+        delete @ads
       listitem = new ListItem(item: item)
       @maincontent.append(listitem.render().el)
       #@ads = $('.preview')
@@ -46,11 +48,12 @@ class List extends Spine.Controller
 
   addAll: =>
     #@$el.empty()
-    @ads.wookmarkClear() if @ads
+    #@ads.wookmarkClear() if @ads
     #delete @ads
     @maincontent.empty()
-    
+    #@maincontent.hide()#css(display: 'hidden')
     Ad.each(@addOne)
+    #@maincontent.fadeIn(3000)
 
     # GFX
     #for preview in $('.preview')

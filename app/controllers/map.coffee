@@ -8,14 +8,16 @@ class Map extends Spine.Controller
     '#map': 'mapbox'
     '#meters': 'meters'
     '#slider': 'slider'
-    '#search': 'search'
+    '#new-ad': 'createButton'
+    
+  events:
+    "click #create": "createAd"
 
   constructor: ->
     super
     #@meters.css("visibility", "hidden")
     @meters.html "100 km"
-    @search.html '<input type="search" placeholder="search" results="0" incremental="true">'
-    @searchfield = $('#search input')
+    @createButton.html '<button id="create">Create Ad</button>'
     
     @map = new @createMap
 
@@ -38,8 +40,11 @@ class Map extends Spine.Controller
         unless @map.getZoom() is zoomAmount # only set center and zoom if needed
           @map.panTo(@circle.getLatLng())
           @map.setZoom(zoomAmount)
+        if L.Browser.gecko
+          # bug in FF
+          @map.setView(@circle.getLatLng(), zoomAmount, false)
     
-    @append @search, @mapbox, @meters, @slider
+    @append @createButton, @mapbox, @meters, @slider
 
 
   createMap: =>
@@ -84,6 +89,7 @@ class Map extends Spine.Controller
       @initialLocation(e.latlng)
       )
 
+
     map.on('click', (e) =>
       map.panTo(e.latlng)
       @circle.setLatLng(e.latlng)
@@ -99,6 +105,7 @@ class Map extends Spine.Controller
 
   initialLocation: (latlng) =>
     @circle.setLatLng(latlng)
+    @map.panTo(latlng)
     zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
     @map.setZoom((zoomAmount - 3))
     @updateMeasure()
@@ -117,5 +124,8 @@ class Map extends Spine.Controller
     @meters.html "#{distance} #{unit}"
     @meters.show()
 
+  createAd: (e) =>
+    e.preventDefault()
+    @trigger "new"
 
 module.exports = Map
