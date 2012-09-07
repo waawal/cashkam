@@ -10,7 +10,7 @@ class App extends Spine.Controller
   constructor: ->
     super
     @ads = new Ads(el: $("#sidebar"))
-    @list = new List(el: $("#maincontent"))
+    @list = new List(el: $("#contentwrapper"))
     @append @ads, @list
     @ad = Ad
 

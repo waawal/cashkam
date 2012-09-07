@@ -27,33 +27,55 @@ body
 //#map:-moz-full-screen { width: 100% !important height: 100% !important }
 //#map:full-screen { width: 100% !important height: 100% !important }
 
+#contentwrapper
+  position absolute
+  top 40px
+  left 280px
+  bottom 0px
+  right 0px
+
 #maincontent
-  //position absolute
-  relative left 0px
-  column-count 4
-  column-span 1
-  width 640px
-  margin-left 20px
+  position relative
+  //relative left 320px
+  //float left
+  //column-count 4
+  //column-fill auto
   
-  //left 280px
-  //top 40px
+  //margin-right 20px
+  
+  //right 40px
 
   .preview
     padding 10px
     background #fff
+    position relative
+    //display none
+    //cursor pointer hand
+    //margin-bottom 20px
+    //column-span none
+    //column-rule none
+    //break-inside avoid
+    transition box-shadow 0.15s ease-out
+    border-radius 2px
+    border 1px solid #DEDEDE
     img
-      width 130px
-      float center
+      width 140px
+      display block
+      //float center
 
 
 #wrapper
   absolute top 40px bottom 40px
+  left 40px
+  right 40px
 
 
 
 #sidebar
-  relative left 40px
+  position relative
+  //relative left 40px
   width 240px
+  //float left
   //margin-left 40px
   //margin-top 40px
   

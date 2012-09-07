@@ -81,11 +81,7 @@ class Map extends Spine.Controller
       )
 
     map.on('locationfound', (e) =>
-      @circle.setLatLng(e.latlng)
-      zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
-      @map.setZoom((zoomAmount - 3))
-      @updateMeasure()
-      #@map.fitBounds(@circle.getBounds())
+      @initialLocation(e.latlng)
       )
 
     map.on('click', (e) =>
@@ -99,6 +95,15 @@ class Map extends Spine.Controller
     map.on 'viewreset', (e) =>
       @updateMeasure
     map
+
+
+  initialLocation: (latlng) =>
+    @circle.setLatLng(latlng)
+    zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
+    @map.setZoom((zoomAmount - 3))
+    @updateMeasure()
+    @trigger "initialLocation"
+    #@map.fitBounds(@circle.getBounds())
 
 
   updateMeasure: =>

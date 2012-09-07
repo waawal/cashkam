@@ -11,7 +11,8 @@ class Categories extends Spine.Controller
 
   events: 
     "change input[type=checkbox]": "change"
-    "click button": "search"
+    "click #browse": "search"
+    "click #create": "create"
 
 
   constructor: ->
@@ -37,6 +38,10 @@ class Categories extends Spine.Controller
   search: (e) =>
     e.preventDefault()
     @trigger "search"
+
+  create: (e) =>
+    e.preventDefault()
+    @trigger "new"
 
 
 module.exports = Categories

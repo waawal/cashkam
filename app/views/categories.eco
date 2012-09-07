@@ -1,5 +1,6 @@
 <form>
-    <button>Browse</button>
+    <button id="browse">Browse</button> <br>
+    <button id="create">Create Ad</button>
     <p>
     <label><input type="checkbox" name="1" id="1"> 
     Clothing, Accessories & Beauty</label>

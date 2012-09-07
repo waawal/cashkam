@@ -7,36 +7,39 @@ import geomongo
 @hook('after_request')
 def enable_cors():
     response.content_type = "application/json"
-    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE'
-    response.headers['Access-Control-Allow-Headers'] = 'Origin,Accept,Content-Type,X-Requested-With,X-CSRF-Token'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'
+    response.headers['Access-Control-Allow-Headers'] = 'origin, accept, Content-Type,\
+                                                         X-Requested-With, X-CSRF-Token'
+    response['Access-Control-Max-Age'] = '180'
     response.headers['Access-Control-Allow-Origin'] = '*'
 
 
 @route('/ads', method=['GET', 'HEAD', 'OPTIONS'])
 def get_ads():
     if request.method == "OPTIONS":
-        return
-    #test = [{'media':'cat.jpg', 'text': 'im a cat', 'id': '34dfg3'},
-    #        {'media':'dog.jpg', 'text': 'im a dog', 'id': '3ddfg3'},
-    #        {'media':'bird.jpg', 'text': 'im a bird', 'id': '34d4g3'},
-    #        {'media':'car.jpg', 'text': 'im a car', 'id': '34dfg6'}]
-    #nelng = float(request.query.get('neLng'))
-    #nelat = float(request.query.get('neLat'))
-    #swlng = float(request.query.get('swLng'))
-    #swlat = float(request.query.get('swLat'))
-    lat = float(request.query.get('lat'))
-    lng = float(request.query.get('lng'))
-    radius = int(request.query.get('radius'))
-    categories = request.query.get('categories').split(',')
-    q = request.query.get('q')
-    
-    dbanswer = geomongo.get_ads(lat, lng, nelat, nelng, swlat, swlng, categories)
-    result = []
-    for rec in dbanswer:
-    #    pprint(rec)
-        result.append({'id': str(rec['_id']), 'media': rec['media'], 'text': rec['text']})
-#    pprint([item for item in request.query.items()])
-    return json.dumps(result)#(test)
+        return ""
+
+    dbrequest = {}
+    dbrequest['lat'] = float(request.query.get('lat'))
+    dbrequest['lng'] = float(request.query.get('lng'))
+    dbrequest['radius'] = int(float(request.query.get('radius')))
+    dbrequest['categories'] = request.query.get('categories').split(',')
+    dbrequest['q'] = request.query.get('q')
+    pprint(dbrequest)
+    dbanswer = geomongo.get_ads(**dbrequest)
+    return json.dumps(dbanswer)
+
+
+@post('/ads')
+def post_ad():
+    if request.method == "OPTIONS":
+        return ""
+
+    dbrequest = json.loads(request.params.keys()[0])
+    del dbrequest['id']
+    dbanswer = geomongo.post_ad(**dbrequest)
+    return json.dumps(dbanswer)
+
 
 @get('/ads/:id')
 def get_ad(id):

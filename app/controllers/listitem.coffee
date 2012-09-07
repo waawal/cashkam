@@ -21,7 +21,6 @@ class ListItem extends Spine.Controller
     @item = item if item
 
     @html(@template(@item))
-    @log @item
     @
 
   # Use a template, in this case via Eco
@@ -35,6 +34,6 @@ class ListItem extends Spine.Controller
   # We have fine control over events, and 
   # easy access to the record too
   click: ->
-    @log @item
+    alert @item.id
     
 module.exports = ListItem
