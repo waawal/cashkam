@@ -3,6 +3,7 @@
 @import '../node_modules/nib/lib/nib'
 
 @import './Karla:400:700'
+@import './IndieFlower:400'
 
 html body
   margin 0
@@ -41,7 +42,7 @@ body
   //column-count 4
   //column-fill auto
   
-  //margin-right 20px
+  margin-bottom 40px
   
   //right 40px
 
@@ -49,8 +50,8 @@ body
     padding 10px
     background #fff
     position relative
-    //display none
-    //cursor pointer hand
+    display none
+    
     //margin-bottom 20px
     //column-span none
     //column-rule none
@@ -59,10 +60,22 @@ body
     border-radius 2px
     border 1px solid #DEDEDE
     img
-      width 140px
+      width 200px
       display block
+      cursor pointer
       //float center
-
+    .distance
+      text-align right
+      font-size 12px
+      line-height 16px
+    .description
+      padding 0px 5px 0px 5px
+      font-family 'Indie Flower', cursive
+      font-size 18px
+      line-height 21px
+      width: 190px
+    //.back
+    //  display none
 
 #wrapper
   absolute top 40px bottom 40px
@@ -72,7 +85,7 @@ body
 
 
 #sidebar
-  position relative
+  position fixed
   //relative left 40px
   width 240px
   //float left

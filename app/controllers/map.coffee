@@ -45,7 +45,7 @@ class Map extends Spine.Controller
   createMap: =>
     map = L.map('map',
       center: [59.712097173322924, 17.9296875]
-      zoom: 12
+      zoom: 7
       #maxZoom: 13
       minZoom: 3
       attributionControl: false
@@ -64,7 +64,7 @@ class Map extends Spine.Controller
     #fullScreen = new L.Control.FullScreen()
     #map.addControl(fullScreen)
 
-    @circle = L.circle([0,0], 20000,
+    @circle = L.circle(map.getCenter(), 20000,
       fillOpacity: 0.3
       fillColor: "#fff"
       #stroke: false

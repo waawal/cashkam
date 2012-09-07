@@ -6,8 +6,8 @@ class ListItem extends Spine.Controller
   className: "preview"
 
 
-  events:
-    "click": "click"
+  #events:
+  #  "click img": "click"
 
   # Bind events to the record
   constructor: ->
@@ -21,6 +21,7 @@ class ListItem extends Spine.Controller
     @item = item if item
 
     @html(@template(@item))
+    
     @
 
   # Use a template, in this case via Eco

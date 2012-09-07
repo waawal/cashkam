@@ -1,4 +1,12 @@
-<img src="<%= @media %>">
-<p>
-  <%= @text %>
-</p>
+<% dist = @distance ? 0.0 %>
+<div class="front">
+  <img src="<%= @media %>">
+  <p class="distance">
+    approx. <%= dist.toFixed(1) %> km
+  </p>
+</div>
+<div class="back">
+  <p class="description">
+    <%= @text %>
+  </p>
+</div>
