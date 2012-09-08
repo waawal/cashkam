@@ -8,19 +8,32 @@ class Map extends Spine.Controller
     '#map': 'mapbox'
     '#meters': 'meters'
     '#slider': 'slider'
-    '#new-ad': 'createButton'
-    
+    '#browse-button': 'browseButton'
+
   events:
-    "click #create": "createAd"
+    "click #browse": "search"
 
   constructor: ->
     super
     #@meters.css("visibility", "hidden")
     @meters.html "100 km"
-    @createButton.html '<button id="create">Create Ad</button>'
+    @browseButton.html '<button id="browse">Browse</button>'
+
     
     @map = new @createMap
+    @setupSlider()
+    
+    # # # # #
+    # Global Events attached to Spine :-( Coming from listitem controller
+    Spine.bind 'showMarker', (marker) => @map.addLayer(marker)
+    Spine.bind 'removeMarker', (marker) => @map.removeLayer(marker)
+    # # # # #
 
+
+    @append @mapbox, @meters, @slider, @browseButton
+
+
+  setupSlider: =>
     @slider.html "" # or else the slider wont be able to init
     @slider = $(@slider).slider
       orientation: "horizontal"
@@ -43,9 +56,6 @@ class Map extends Spine.Controller
         if L.Browser.gecko
           # bug in FF
           @map.setView(@circle.getLatLng(), zoomAmount, false)
-    
-    @append @createButton, @mapbox, @meters, @slider
-
 
   createMap: =>
     map = L.map('map',
@@ -63,7 +73,7 @@ class Map extends Spine.Controller
       'http://{s}.tiles.mapbox.com/v3/mapbox.mapbox-light/{z}/{x}/{y}.png',
         maxZoom: 14
         attributionControl: false
-        updateWhenIdle: true
+        #updateWhenIdle: true
     ).addTo(map)
     # Full screen
     #fullScreen = new L.Control.FullScreen()
@@ -124,8 +134,10 @@ class Map extends Spine.Controller
     @meters.html "#{distance} #{unit}"
     @meters.show()
 
-  createAd: (e) =>
+
+  search: (e) =>
     e.preventDefault()
-    @trigger "new"
+    @trigger "search"
+
 
 module.exports = Map

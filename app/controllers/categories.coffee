@@ -12,16 +12,16 @@ class Categories extends Spine.Controller
 
   events: 
     "change input[type=checkbox]": "change"
-    "click #browse": "search"
     
+    "click #create": "createAd"
+    "click #show-categories": (e) => $("form").slideToggle("slow")
 
 
   constructor: ->
     super
     @status = {}
-    @el.hide()
     @html require('views/categories')()
-    @el.fadeIn(800)
+    $("form").hide()
 
 
   change: (e) =>
@@ -35,12 +35,9 @@ class Categories extends Spine.Controller
     else
       result.join(',')
 
-
-  search: (e) =>
+  createAd: (e) =>
     e.preventDefault()
-    @trigger "search"
-
-  
+    @trigger "new:ad"
 
 
 module.exports = Categories

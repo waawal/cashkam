@@ -13,10 +13,10 @@ class Ads extends Spine.Controller
     @map = new Map (el: $("#map-holder"))
 
     @categories = new Categories(el: $("#categories"))
-    @categories.bind "search", @queryForAds
+    @map.bind "search", @queryForAds
     @map.bind "initialLocation", @queryForAds
-    @map.bind "new", @createAd
-    @append @map, @categories
+    @categories.bind "new:ad", @createAd
+    @append @categories, @map
 
 
   getData: =>

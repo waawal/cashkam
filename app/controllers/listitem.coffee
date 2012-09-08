@@ -1,4 +1,6 @@
 Spine = require('spine')
+L = require ('lib/leaflet')
+L.Icon.Default.imagePath = 'http://leaflet.cloudmade.com/dist/images/'
 
 class ListItem extends Spine.Controller
   
@@ -6,8 +8,9 @@ class ListItem extends Spine.Controller
   className: "preview"
 
 
-  #events:
-  #  "click img": "click"
+  events:
+    "mouseenter img": "addMarker"
+    "mouseleave img": "removeMarker"
 
   # Bind events to the record
   constructor: ->
@@ -19,22 +22,23 @@ class ListItem extends Spine.Controller
   # Render an element
   render: (item) =>
     @item = item if item
-
     @html(@template(@item))
-    
     @
 
-  # Use a template, in this case via Eco
-  template: (items) ->
-    require('views/list')(items)
+  template: (item) ->
+    require('views/list')(item)
 
   # Called after an element is destroyed
   remove: ->
     @el.remove()
 
-  # We have fine control over events, and 
-  # easy access to the record too
-  click: ->
-    alert @item.id
+  # Picked up by map Controller    WARNING - Global Events!
+  addMarker: =>
+    @marker = new L.Marker(@item.latlng)
+    Spine.trigger('showMarker', @marker)
+    #@log "addMarker"
+  removeMarker: =>
+    Spine.trigger('removeMarker', @marker)
+    #@log "removeMarker"
     
 module.exports = ListItem

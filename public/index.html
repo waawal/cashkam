@@ -14,7 +14,7 @@
     var exports = this;
     jQuery(function(){
       var App = require("index");
-      exports.app = new App({el: $("#wrapper")});      
+      exports.app = new App({el: $("#body")});      
     });
   </script>
   
@@ -23,21 +23,21 @@
   <body>
     <div class="fadeout top"></div>
 
-    <div id="wrapper">
       <div id="sidebar">
-        <div id="map-holder">
-          <div id="new-ad"></div>
-          <div id="map"></div>
-          <div id="slider"></div>
-          <div id="meters"></div>
-        </div>
+
         <div id="categories"></div>
+
+        <div id="map-holder">
+            <div id="map"></div>
+            <div id="slider"></div>
+            <div id="meters"></div>
+            <div id="browse-button"></div>
+        </div>
     </div>
+
     <div id="contentwrapper">
       <div id="maincontent"></div>
     </div>
-  </div>
 
-  <div class="fadeout bottom"></div>
   </body>
 </html>

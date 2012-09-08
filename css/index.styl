@@ -82,38 +82,40 @@ body
   left 40px
   right 40px
 
-
-
 #sidebar
-  position relative
+  position fixed
+  z-index: 100
   //relative left 40px
   width 240px
   //float left
-  //margin-left 40px
-  //margin-top 40px
-
-  #new-ad
-    margin-bottom 10px
+  margin-left 20px
+  margin-top 40px
   
   button
     width 100%
-    height 32px
+    //float left
+    height 20px
     font-weight 700
+    //margin-bottom 10px
     //border-radius top 3px
   input[type=search]
     width 100%
     //height 32px
-    margin-bottom 20px
+    margin-bottom 10px
   #meters
     text-align right
     margin-top 5px
     font-weight 400
   #categories
-    margin-top 20px
+    //margin-top 20px
     margin-bottom 20px
-  #slider
-    margin-bottom 20px
+  //#slider
+  //  margin-bottom 20px
 
+#browse-button
+  margin-top 20px
+  #browse
+    height: 32px
 .fadeout
   z-index 50
   position fixed

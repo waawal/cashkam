@@ -33,6 +33,7 @@ def get_ads(lat, lng, radius, categories, q):
             {'id': str(rec['obj']['_id']),
              'text': rec['obj']['text'],
              'media': rec['obj']['media'],
+             'latlng': rec['obj']['loc'],
              'distance': distance,
              })
     return result
