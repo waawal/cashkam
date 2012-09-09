@@ -83,9 +83,9 @@ class Map extends Spine.Controller
       fillOpacity: 0.3
       fillColor: "#fff"
       #stroke: false
-      weight: 3
-      opacity: 0.35
-      color: 'black'
+      weight: 2
+      opacity: 0.6
+      color: '#000'
       clickable: false
       ).addTo(map)
 
