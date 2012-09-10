@@ -1,7 +1,11 @@
 # CashKam WEB & Backend
 
-Dev:
+## Dev
+
+    npm install .
+
     hem server
 
-Build:
+## Build
+
     hem build
