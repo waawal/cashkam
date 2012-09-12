@@ -9,6 +9,7 @@ class Map extends Spine.Controller
     '#meters': 'meters'
     '#slider': 'slider'
     '#browse-button': 'browseButton'
+    '#map-frame': 'mapframe'
 
   events:
     "click #browse": "search"
@@ -29,8 +30,8 @@ class Map extends Spine.Controller
     Spine.bind 'removeMarker', (marker) => @map.removeLayer(marker)
     # # # # #
 
-
-    @append @mapbox, @meters, @slider, @browseButton
+    @mapframe.append @mapbox
+    @append @mapframe, @meters, @slider, @browseButton
 
 
   setupSlider: =>

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset=utf-8>
-  <title>App</title>
+  <title>CashKam (a)</title>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
  <!--[if lte IE 8]>
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
@@ -14,7 +14,7 @@
     var exports = this;
     jQuery(function(){
       var App = require("index");
-      exports.app = new App({el: $("#body")});      
+      exports.app = new App({el: $("#wrapper")});      
     });
   </script>
   
@@ -22,13 +22,16 @@
 </head>
   <body>
     <div class="fadeout top"></div>
-
+    <div id="wrapper">
       <div id="sidebar">
+        <button id="hide-sidebar">Hide</button>
 
         <div id="categories"></div>
 
         <div id="map-holder">
-            <div id="map"></div>
+            <div id="map-frame">
+              <div id="map"></div>
+            </div>
             <div id="slider"></div>
             <div id="meters"></div>
             <div id="browse-button"></div>
@@ -38,6 +41,6 @@
     <div id="contentwrapper">
       <div id="maincontent"></div>
     </div>
-
+    </div>
   </body>
 </html>

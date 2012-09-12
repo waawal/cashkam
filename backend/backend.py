@@ -58,4 +58,4 @@ def get_ad(id):
     return id
 
 
-run(host='192.168.0.224', port=int(os.environ.get("PORT", 8080)), server='gevent')
+run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), server='gevent')

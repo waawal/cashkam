@@ -12,62 +12,81 @@ html body
   height 100%
 
 body
+  position: relative
   font-size 14px
   line-height 21px
   color #333
   background #f6f6f6
-  background-image url('data:image/pngbase64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC')
+  background-image url('linen.jpeg')
   font-family "Karla", sans-serif
   font-weight 400
   //font-family "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important
 
+#map-frame
+  background #fff
+  background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
+  //margin 10px
+  height 260px
+  box-shadow 2px 2px 1px rgba(0,0,0,0.15)
+
 #map
-  width 240px
+  //width 240px
   height 240px
+  top 10px
+  //bottom 10px
+  margin 10px
+  
+
 //#map:-webkit-full-screen { width: 100% !important height: 100% !important }
 //#map:-moz-full-screen { width: 100% !important height: 100% !important }
 //#map:full-screen { width: 100% !important height: 100% !important }
 
 #contentwrapper
-  position absolute
-  top 40px
-  left 280px
-  bottom 0px
-  right 0px
+  display:table-cell
+  //position relative
+  //top 40px
+  //left 20px
+  //right: 20px
+  //bottom 0px
+  //right 0px
+  //margin-top 40px
+  margin-left 20px
+  //float left
 
 #maincontent
-  position relative
+  position: relative
+
+  //display: none
+  //bottom 0px
+  //right 0px
+  //top 0px
+  //left 0px
   //relative left 320px
-  //float left
+  
   //column-count 4
   //column-fill auto
-  
-  margin-bottom 40px
-  
+  //display: none
   //right 40px
 
   .preview
     padding 10px
     background #fff
+
     position relative
-    display none
     
-    //margin-bottom 20px
-    //column-span none
-    //column-rule none
-    //break-inside avoid
-    transition box-shadow 0.15s ease-out
-    border-radius 2px
+    box-shadow 2px 2px 1px rgba(0,0,0,0.1)
     border 1px solid #DEDEDE
     img
+      display: block
       width 200px
+      border-radius 2px
       display block
       cursor pointer
       //float center
     .distance
       text-align right
-      font-size 12px
-      line-height 16px
+      font-size 10px
+      line-height 12px
     .description
       padding 0px 5px 0px 5px
       font-family 'Indie Flower', cursive
@@ -79,17 +98,18 @@ body
 
 #wrapper
   absolute top 40px bottom 40px
-  left 40px
-  right 40px
+  display: table
+  table-layout: fixed
 
 #sidebar
-  position fixed
+  display:table-cell
+  //position relative
   z-index: 100
   //relative left 40px
   width 240px
   //float left
   margin-left 20px
-  margin-top 40px
+  //margin-top 40px
   
   button
     width 100%
@@ -105,6 +125,8 @@ body
   #meters
     text-align right
     margin-top 5px
+    margin-bottom 5px
+    margin-right 10px
     font-weight 400
   #categories
     //margin-top 20px
@@ -114,6 +136,7 @@ body
 
 #browse-button
   margin-top 20px
+  box-shadow 2px 2px 1px rgba(0,0,0,0.1)
   #browse
     height: 32px
 .fadeout

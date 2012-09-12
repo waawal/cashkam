@@ -20,12 +20,25 @@ class List extends Spine.Controller
 
     @append @maincontent
 
+    # # # # #
+    # Global Events attached to Spine
+    Spine.bind 'refreshList', => @refreshList()
+    # # # # #
+
     
   wookmarkOptions:
     offset: 20
     itemWidth: 222
     autoResize: true
-    container: $("#contentwrapper")
+    container: $("#maincontent")
+
+
+  refreshList: =>
+    @log "refresh"
+    if @ads
+        @ads.wookmarkClear()
+    @ads = $('.preview')
+    @ads.wookmark(@wookmarkOptions)
 
 
   addOne: (item) =>

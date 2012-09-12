@@ -1,11 +1,16 @@
 Spine = require('spine')
-
+require('lib/jquery-ui')
 Map = require('controllers/map')
 Ad = require 'models/ad'
 Categories = require 'controllers/categories'
 
 class Ads extends Spine.Controller
 
+  elements:
+    '#hide-sidebar': 'hideButton'
+
+  events:
+    "click #hide-sidebar": "hideSidebar"
 
   constructor: ->
     super
@@ -53,6 +58,11 @@ class Ads extends Spine.Controller
       processData:true
       data:data
       )
+
+
+  hideSidebar: =>
+    @el.hide("slide", { direction: "left" }, 100)
+    Spine.trigger('refreshList')
 
     
 module.exports = Ads
