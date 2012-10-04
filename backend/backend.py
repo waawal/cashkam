@@ -1,5 +1,5 @@
 
-
+import sys
 import os
 import json
 from pprint import pprint
@@ -58,4 +58,4 @@ def get_ad(id):
     return id
 
 
-run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), server='gevent')
+run(host='0.0.0.0', port=int(sys.argv[1]), server='gevent')
