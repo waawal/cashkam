@@ -7,13 +7,15 @@ from pprint import pprint
 
 from gevent import monkey; monkey.patch_all()
 
-from bottle import hook, request, response, route, run, get, post, put
+from bottle import Bottle,  hook, request, response, route, run, get, post, put
 
 import geomongo
 
+app = Bottle()
+
 ### CORS Implementation
 
-@hook('after_request')
+@app.hook('after_request')
 def enable_cors():
     """ Appends CORS-related data to response headers """
     headers = 'origin, accept, Content-Type, X-Requested-With, X-CSRF-Token'
@@ -24,14 +26,14 @@ def enable_cors():
     response.headers['Access-Control-Allow-Origin'] = '*'
 
 
-@route('/ads', method='OPTIONS')
+@app.route('/ads', method='OPTIONS')
 def cors_options():
     """ Answers the CORS-preflight request"""
     return " "
 
 ###
 
-@get('/ads')
+@app.get('/ads')
 def get_ads():
     #enable_cors()
 
@@ -45,7 +47,7 @@ def get_ads():
     dbanswer = geomongo.get_ads(**dbrequest)
     return json.dumps(dbanswer)
 
-@post('/ads')
+@app.post('/ads')
 def post_ad():
     #enable_cors()
     dbrequest = json.loads(request.params.keys()[0])
@@ -53,9 +55,9 @@ def post_ad():
     dbanswer = geomongo.post_ad(**dbrequest)
     return json.dumps(dbanswer)
 
-@get('/ads/:id')
+@app.get('/ads/:id')
 def get_ad(id):
     return id
 
 
-run(host='0.0.0.0', port=int(sys.argv[1]), server='gevent')
+# run(host='0.0.0.0', port=int(sys.argv[1]), server='gevent')
