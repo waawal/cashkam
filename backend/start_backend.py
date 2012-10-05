@@ -30,7 +30,7 @@ def enable_cors():
 def cors_options():
     """ Answers the CORS-preflight request"""
     enable_cors()
-    return " "
+    return {}
 
 ###
 
@@ -48,7 +48,7 @@ def get_ads():
     dbanswer = geomongo.get_ads(**dbrequest)
     return json.dumps(dbanswer)
 
-@app.route('/ads', methods=['POST'])
+@app.route('/ads', method=['POST'])
 def post_ad():
     #enable_cors()
     dbrequest = json.loads(request.params.keys()[0])
@@ -56,7 +56,7 @@ def post_ad():
     dbanswer = geomongo.post_ad(**dbrequest)
     return json.dumps(dbanswer)
 
-@app.get('/ads/:id')
+@app.route('/ads/:id', method=['GET'])
 def get_ad(id):
     return id
 
