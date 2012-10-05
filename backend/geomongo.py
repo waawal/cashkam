@@ -13,27 +13,22 @@ def post_ad(media, lat, lng, text=None):
     db.places.ensure_index([("loc", GEO2D)])
     return {'id': result}
 
-def get_ads(lat, lng, radius, categories, q):
-    #box = [[swlat, swlng], [nelat,  nelng]]
+def get_ads(swlat, swlng, nelat, nelng, categories, q):
+    box = [[swlat, swlng], [nelat,  nelng]]
     #return [ad for ad in db.places.find({"loc": {"$within": {"$box": box}}})]
     # JS= distances = db.runCommand({ geoNear : "points", near : [0, 0], spherical : true, maxDistance : range / earthRadius /* to radians */ }).results
-    maxdistance = float(radius/1000) / EARTH_RADIUS
-    print "maxdist", maxdistance
 
     db.places.ensure_index([("loc", GEO2D)])
-    dbresult = db.command(SON([('geoNear', 'places'),
-                    ('near', [lat, lng]),
-                    ('spherical', True),
-                    ('maxDistance', maxdistance)])
-                    )
+    dbresult = db.places.find({"loc": {"$within": {"$box": box}}})
+    #dbresult = db.command(SON([('$within', 'places'),
+    #                ('$box', box),])
+    #                )
     result = []
     for rec in dbresult['results']:
-        distance = rec['dis'] * EARTH_RADIUS
         result.append(
             {'id': str(rec['obj']['_id']),
              'text': rec['obj']['text'],
              'media': rec['obj']['media'],
              'latlng': rec['obj']['loc'],
-             'distance': distance,
              })
     return result

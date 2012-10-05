@@ -31,9 +31,11 @@ def get_ads():
         return {}
     else:
         dbrequest = {}
-        dbrequest['lat'] = float(request.query.get('lat'))
-        dbrequest['lng'] = float(request.query.get('lng'))
-        dbrequest['radius'] = int(float(request.query.get('radius')))
+        dbrequest['swlat'] = float(request.query.get('swlat'))
+        dbrequest['swlng'] = float(request.query.get('swlng'))
+        dbrequest['nelat'] = float(request.query.get('nelat'))
+        dbrequest['nelng'] = float(request.query.get('nelng'))
+        #dbrequest['radius'] = int(float(request.query.get('radius')))
         dbrequest['categories'] = request.query.get('categories').split(',')
         dbrequest['q'] = request.query.get('q')
         pprint(dbrequest)

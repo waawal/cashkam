@@ -19,13 +19,16 @@ class Ads extends Spine.Controller
 
 
   getData: =>
-    latlng = @map.circle.getLatLng()
-    radius = @map.circle.getRadius()
+    #latlng = @map.circle.getLatLng()
+    #radius = @map.circle.getRadius()
+    latlng = @map.map.getBounds()
+    @log latlng
     q = @categories.searchfield.val()
     data =
-      lat: latlng['lat']
-      lng: latlng['lng']
-      radius: radius
+      nelat: latlng.northEast['lat']
+      nelng: latlng.northEast['lng']
+      swlat: latlng.southWest['lat']
+      swlng: latlng.southWest['lng']
       #neLat: boundingBox['_northEast']['lat']
       #neLng: boundingBox['_northEast']['lng']
       #swLat: boundingBox['_southWest']['lat']

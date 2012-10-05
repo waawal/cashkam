@@ -22,7 +22,6 @@ class Map extends Spine.Controller
 
     
     @map = new @createMap
-    @setupSlider()
     
     # # # # #
     # Global Events attached to Spine :-( Coming from listitem controller
@@ -31,32 +30,7 @@ class Map extends Spine.Controller
     # # # # #
 
     @mapframe.append @mapbox
-    @append @mapframe, @meters, @slider, @browseButton
-
-
-  setupSlider: =>
-    @slider.html "" # or else the slider wont be able to init
-    @slider = $(@slider).slider
-      orientation: "horizontal"
-      #range: "min"
-      min: 500
-      max: 100000
-      step: 500
-      value: 80000
-      slide: (event, ui) =>
-        weight = 100000
-        rad = (weight-ui.value) or 500
-        @circle.setRadius(rad)
-        @updateMeasure()
-      stop: (event, ui) =>
-        zoomAmount = (@map.getBoundsZoom(@circle.getBounds(), true))-2
-        #@log (zoomAmount is @map.getZoom()) # ->(inside = true)
-        unless @map.getZoom() is zoomAmount # only set center and zoom if needed
-          @map.panTo(@circle.getLatLng())
-          @map.setZoom(zoomAmount)
-        if L.Browser.gecko
-          # bug in FF
-          @map.setView(@circle.getLatLng(), zoomAmount, false)
+    @append @mapframe, @meters, @browseButton
 
   createMap: =>
     map = L.map('map',
@@ -65,7 +39,7 @@ class Map extends Spine.Controller
       #maxZoom: 13
       minZoom: 3
       attributionControl: false
-      zoomControl: false
+      zoomControl: true
       doubleClickZoom: false
       )
 
@@ -80,16 +54,6 @@ class Map extends Spine.Controller
     #fullScreen = new L.Control.FullScreen()
     #map.addControl(fullScreen)
 
-    @circle = L.circle(map.getCenter(), 20000,
-      fillOpacity: 0.3
-      fillColor: "#fff"
-      #stroke: false
-      weight: 2
-      opacity: 0.6
-      color: '#000'
-      clickable: false
-      ).addTo(map)
-
     map.locate(
       setView: true
       maxZoom: 13
@@ -103,7 +67,6 @@ class Map extends Spine.Controller
 
     map.on('click', (e) =>
       map.panTo(e.latlng)
-      @circle.setLatLng(e.latlng)
       )
 
     #map.on 'exitFullscreen', (e) =>
@@ -115,23 +78,23 @@ class Map extends Spine.Controller
 
 
   initialLocation: (latlng) =>
-    @circle.setLatLng(latlng)
     @map.panTo(latlng)
-    zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
-    @map.setZoom((zoomAmount - 3))
+    #zoomAmount = @map.getBoundsZoom(@circle.getBounds(), true) # ->(inside = true)
+    #@map.setZoom((zoomAmount - 3))
     @updateMeasure()
     @trigger "initialLocation"
     #@map.fitBounds(@circle.getBounds())
 
 
   updateMeasure: =>
-    distance = @circle.getRadius()
-    if distance >= 1000
-      distance = (Math.round(distance / 100) / 10).toFixed(0)
-      unit = "km"
-    else
-      unit = "m"
-
+    #distance = @circle.getRadius()
+    #if distance >= 1000
+    #  distance = (Math.round(distance / 100) / 10).toFixed(0)
+    #  unit = "km"
+    #else
+    #  unit = "m"
+    distance = 4
+    unit = "km"
     @meters.html "#{distance} #{unit}"
     @meters.show()
 
