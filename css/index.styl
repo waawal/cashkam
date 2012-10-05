@@ -42,15 +42,14 @@ body
 //#map:full-screen { width: 100% !important height: 100% !important }
 
 #contentwrapper
-  display:table-cell
-  //position relative
-  //top 40px
-  //left 20px
+  //display:table-cell
+  //position absolute
+  padding 20px 20px 20px 280px
   //right: 20px
   //bottom 0px
   //right 0px
   //margin-top 40px
-  margin-left 20px
+  //margin-left 20px
   //float left
 
 #maincontent
@@ -60,19 +59,16 @@ body
   //bottom 0px
   //right 0px
   //top 0px
-  //left 0px
+  //left 260px
   //relative left 320px
-  
-  //column-count 4
-  //column-fill auto
-  //display: none
-  //right 40px
 
   .preview
+    display: block
     padding 10px
     background #fff
+    margin 10px
 
-    position relative
+    //position relative
     
     box-shadow 2px 2px 1px rgba(0,0,0,0.1)
     border 1px solid #DEDEDE
@@ -98,12 +94,14 @@ body
 
 #wrapper
   absolute top 40px bottom 40px
-  display: table
-  table-layout: fixed
+  position relative
+  width 100%
+  //display: table
+  //table-layout: fixed
 
 #sidebar
-  display:table-cell
-  //position relative
+  display: block
+  position absolute
   z-index: 100
   //relative left 40px
   width 240px

@@ -2,9 +2,9 @@ Spine = require('spine')
 Ad = require 'models/ad'
 ListItem = require 'controllers/listitem'
 $ = Spine.$
-require 'lib/jquery.wookmark'
-require 'lib/gfx'
-require 'lib/gfx.flip'
+require 'lib/jquery.masonry.min'
+#require 'lib/gfx'
+#require 'lib/gfx.flip'
 
 class List extends Spine.Controller
 
@@ -16,7 +16,7 @@ class List extends Spine.Controller
     super
     Ad.bind("refresh", @addAll)
     Ad.bind("create",  @addOne)
-    @maincontent = $('#maincontent')
+    #@maincontent = $('#maincontent')
 
     @append @maincontent
 
@@ -25,57 +25,37 @@ class List extends Spine.Controller
     Spine.bind 'refreshList', => @refreshList()
     # # # # #
 
-    
-  wookmarkOptions:
-    offset: 20
-    itemWidth: 222
-    autoResize: true
-    container: $("#maincontent")
-
 
   refreshList: =>
     @log "refresh"
-    if @ads
-        @ads.wookmarkClear()
-    @ads = $('.preview')
-    @ads.wookmark(@wookmarkOptions)
+    @maincontent.masonry('reloadItems')
+    
 
 
   addOne: (item) =>
     if item
-      if @ads
-        @ads.wookmarkClear()
-        delete @ads
       listitem = new ListItem(item: item)
-      @maincontent.append(listitem.render().el)
-      #@ads = $('.preview')
-      #@ads.wookmark(
-      #  offset: 20
-      #  itemWidth: 220
-      #  autoResize: true
-      #  container: $('#maincontent')
-      #  )
-      @ads = $('.preview')
-      @ads.wookmark(@wookmarkOptions)
+      brick = listitem.render()
+      @maincontent.append(brick.el)
+
       
 
   addAll: =>
-    #@$el.empty()
-    #@ads.wookmarkClear() if @ads
-    #delete @ads
     @maincontent.empty()
-    #@maincontent.hide()#css(display: 'hidden')
     Ad.each(@addOne)
-    #@maincontent.fadeIn(3000)
+    @maincontent.imagesLoaded =>
+      @masonry = @maincontent.masonry
+        itemSelector: ".preview"
+        #columnWidth: 200
+        #gutterWidth: 20
+        #isFitWidth: true
+        isAnimated: true
+        animationOptions:
+          duration: 280
+          easing: "linear"
+          queue: false
+    @refreshList()
 
-    # GFX
-    #for preview in $('.preview')
-    #  $(preview).gfxFlip(width: 220).click ->
-    #    $(this).trigger "flip"
-    #@delay( () -> 
-    #  @ads.wookmark(wookmarkOptions)
-    #  , 200)
-    #@trigger "rendered"
 
 
 module.exports = List

@@ -6,12 +6,6 @@ Categories = require 'controllers/categories'
 
 class Ads extends Spine.Controller
 
-  elements:
-    '#hide-sidebar': 'hideButton'
-
-  events:
-    "click #hide-sidebar": "hideSidebar"
-
   constructor: ->
     super
 
@@ -59,10 +53,6 @@ class Ads extends Spine.Controller
       data:data
       )
 
-
-  hideSidebar: =>
-    @el.hide("slide", { direction: "left" }, 100)
-    Spine.trigger('refreshList')
 
     
 module.exports = Ads

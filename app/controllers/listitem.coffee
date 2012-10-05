@@ -38,7 +38,7 @@ class ListItem extends Spine.Controller
     Spine.trigger('showMarker', @marker)
     #@log "addMarker"
   removeMarker: =>
-    @log @marker
+    #@log @marker
     Spine.trigger('removeMarker', @marker)
     #@log "removeMarker"
     
