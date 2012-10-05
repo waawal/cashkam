@@ -52,4 +52,4 @@ def get_ad(id):
     return id
 
 
-# run(host='0.0.0.0', port=int(sys.argv[1]), server='gevent')
+run(app, host='0.0.0.0', port=int(sys.argv[1]), server='gevent')
