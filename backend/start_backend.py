@@ -15,7 +15,7 @@ app = Bottle()
 
 ### CORS Implementation
 
-@app.hook('after_request')
+#@app.hook('after_request')
 def enable_cors():
     """ Appends CORS-related data to response headers """
     headers = 'origin, accept, Content-Type, X-Requested-With, X-CSRF-Token'
@@ -56,7 +56,7 @@ def post_ad():
     dbanswer = geomongo.post_ad(**dbrequest)
     return json.dumps(dbanswer)
 
-@app.get('/ads/:id')
+@app.route('/ads/:id', methods=['GET'])
 def get_ad(id):
     return id
 
