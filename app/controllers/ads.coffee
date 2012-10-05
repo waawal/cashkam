@@ -13,26 +13,18 @@ class Ads extends Spine.Controller
 
     @categories = new Categories(el: $("#categories"))
     @map.bind "search", @queryForAds
-    @map.bind "initialLocation", @queryForAds
     @categories.bind "new:ad", @createAd
     @append @map, @categories
 
 
   getData: =>
-    #latlng = @map.circle.getLatLng()
-    #radius = @map.circle.getRadius()
     latlng = @map.map.getBounds()
-    @log latlng
     q = @categories.searchfield.val()
     data =
       nelat: latlng._northEast['lat']
       nelng: latlng._northEast['lng']
       swlat: latlng._southWest['lat']
       swlng: latlng._southWest['lng']
-      #neLat: boundingBox['_northEast']['lat']
-      #neLng: boundingBox['_northEast']['lng']
-      #swLat: boundingBox['_southWest']['lat']
-      #swLng: boundingBox['_southWest']['lng']
       categories: @categories.represent()
       q: q
     data

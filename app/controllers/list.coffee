@@ -15,24 +15,27 @@ class List extends Spine.Controller
   constructor: ->
     super
     Ad.bind("refresh", @addAll)
+    #Ad.bind("refresh", @refreshList)
     Ad.bind("create",  @addOne)
-    Ad.bind("create",  @refreshList)
+    #Ad.bind("create",  @refreshList)
     #@maincontent = $('#maincontent')
 
     @append @maincontent
 
     # # # # #
     # Global Events attached to Spine
-    Spine.bind 'refreshList', => @refreshList()
+    Spine.bind 'refreshList', -> @refreshList
     # # # # #
 
 
   refreshList: (refreshType) =>
     #@log "refresh"
-    if refreshType is 'refresh'
-      @maincontent.masonry('reloadItems')
-    else
-      @maincontent.masonry('reload')
+    #if refreshType is 'refresh'
+    @maincontent.masonry('reload')
+    #@maincontent.masonry('reload')
+    #@delay(, 600)    #TODO: Make it leaner!
+    #else
+    
     
     
 
@@ -42,26 +45,29 @@ class List extends Spine.Controller
       listitem = new ListItem(item: item)
       brick = listitem.render()
       @maincontent.append(brick.el)
+      @maincontent.masonry('reload')
 
       
 
   addAll: =>
     @maincontent.empty()
-    Ad.each(@addOne)
-    @maincontent.imagesLoaded =>
-      @maincontent.masonry
+    @maincontent.masonry
         itemSelector: ".preview"
+    Ad.each(@addOne)
+    @maincontent.masonry('reloadItems')
+    #@maincontent.imagesLoaded =>
+    #  @maincontent.masonry
+    #    itemSelector: ".preview"
         #columnWidth: 200
         #gutterWidth: 20
         #isFitWidth: true
-        isAnimated: true
-        animationOptions:
-          duration: 280
-          easing: "linear"
-          queue: false
-      @masonryLoaded = true
-    if @masonryLoaded
-        @refreshList('refresh')
+        #isAnimated: true
+        #animationOptions:
+        #  duration: 280
+        #  easing: "linear"
+        #  queue: false
+      #@masonryLoaded = true
+    #@maincontent.masonry('reload')
 
 
 
