@@ -25,10 +25,10 @@ class Ads extends Spine.Controller
     @log latlng
     q = @categories.searchfield.val()
     data =
-      nelat: latlng.northEast['lat']
-      nelng: latlng.northEast['lng']
-      swlat: latlng.southWest['lat']
-      swlng: latlng.southWest['lng']
+      nelat: latlng._northEast['lat']
+      nelng: latlng._northEast['lng']
+      swlat: latlng._southWest['lat']
+      swlng: latlng._southWest['lng']
       #neLat: boundingBox['_northEast']['lat']
       #neLng: boundingBox['_northEast']['lng']
       #swLat: boundingBox['_southWest']['lat']
