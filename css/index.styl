@@ -1,3 +1,4 @@
+//@import './normalize.css'
 @import './mixin'
 @import './jqueryui'
 @import '../node_modules/nib/lib/nib'
@@ -44,7 +45,7 @@ body
 #contentwrapper
   //display:table-cell
   //position absolute
-  padding 20px 20px 20px 280px
+  padding 0px 20px 20px 280px
   //right: 20px
   //bottom 0px
   //right 0px
@@ -107,7 +108,7 @@ body
   width 240px
   //float left
   margin-left 20px
-  //margin-top 40px
+  //margin-top 10px
   
   button
     width 100%
@@ -118,8 +119,11 @@ body
     //border-radius top 3px
   input[type=search]
     width 100%
+    overlow: hidden
     //height 32px
     margin-bottom 10px
+    //margin-left 10px
+    //margin-right 10px
   #meters
     text-align right
     margin-top 5px
@@ -127,7 +131,7 @@ body
     margin-right 10px
     font-weight 400
   #categories
-    //margin-top 20px
+    margin-top 10px
     margin-bottom 20px
   //#slider
   //  margin-bottom 20px

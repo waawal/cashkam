@@ -15,7 +15,7 @@ class Ads extends Spine.Controller
     @map.bind "search", @queryForAds
     @map.bind "initialLocation", @queryForAds
     @categories.bind "new:ad", @createAd
-    @append @categories, @map
+    @append @map, @categories
 
 
   getData: =>

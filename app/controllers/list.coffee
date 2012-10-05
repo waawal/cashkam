@@ -16,6 +16,7 @@ class List extends Spine.Controller
     super
     Ad.bind("refresh", @addAll)
     Ad.bind("create",  @addOne)
+    Ad.bind("create",  @refreshList)
     #@maincontent = $('#maincontent')
 
     @append @maincontent
@@ -26,9 +27,13 @@ class List extends Spine.Controller
     # # # # #
 
 
-  refreshList: =>
-    @log "refresh"
-    @maincontent.masonry('reloadItems')
+  refreshList: (refreshType) =>
+    #@log "refresh"
+    if refreshType is 'refresh'
+      @maincontent.masonry('reloadItems')
+    else
+      @maincontent.masonry('reload')
+    
     
 
 
@@ -44,7 +49,7 @@ class List extends Spine.Controller
     @maincontent.empty()
     Ad.each(@addOne)
     @maincontent.imagesLoaded =>
-      @masonry = @maincontent.masonry
+      @maincontent.masonry
         itemSelector: ".preview"
         #columnWidth: 200
         #gutterWidth: 20
@@ -54,7 +59,9 @@ class List extends Spine.Controller
           duration: 280
           easing: "linear"
           queue: false
-    @refreshList()
+      @masonryLoaded = true
+    if @masonryLoaded
+        @refreshList('refresh')
 
 
 
