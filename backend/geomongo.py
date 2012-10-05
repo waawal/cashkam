@@ -28,9 +28,9 @@ def get_ads(swlat, swlng, nelat, nelng, categories, q):
     for rec in dbresult:
         pprint(rec)
         result.append(
-            {'id': str(rec['obj']['_id']),
-             'text': rec['obj']['text'],
-             'media': rec['obj']['media'],
-             'latlng': rec['obj']['loc'],
+            {'id': str(rec['_id']),
+             'text': rec['text'],
+             'media': rec['media'],
+             'latlng': rec['loc'],
              })
     return result
