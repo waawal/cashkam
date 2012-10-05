@@ -68,6 +68,7 @@ body
     padding 10px
     background #fff
     margin 10px
+    background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
 
     //position relative
     
@@ -102,7 +103,8 @@ body
 
 #sidebar
   display: block
-  position absolute
+  //position absolute
+  position fixed
   z-index: 100
   //relative left 40px
   width 240px
@@ -133,8 +135,18 @@ body
   #categories
     margin-top 10px
     margin-bottom 20px
+    position fixed
+    bottom 20px
+    width 240px
+  #map-holder
+    position fixed
+    top 40px
+    width 240px
   //#slider
-  //  margin-bottom 20px
+  //  position absolute
+  //  left 80px
+  //  top 40px
+  //  z-index 999
 
 #browse-button
   margin-top 20px
