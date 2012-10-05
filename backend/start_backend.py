@@ -7,7 +7,7 @@ from pprint import pprint
 
 from gevent import monkey; monkey.patch_all()
 
-from bottle import Bottle,  hook, request, response, route, run, get, post, put
+from bottle import Bottle, hook, request, response, route, run, get, post, put
 
 import geomongo
 
@@ -26,14 +26,15 @@ def enable_cors():
     response.headers['Access-Control-Allow-Origin'] = '*'
 
 
-@app.route('/ads', method='OPTIONS')
+@app.route('/ads', method=['OPTIONS'])
 def cors_options():
     """ Answers the CORS-preflight request"""
+    enable_cors()
     return " "
 
 ###
 
-@app.get('/ads')
+@app.route('/ads', method=['GET'])
 def get_ads():
     #enable_cors()
 
@@ -47,7 +48,7 @@ def get_ads():
     dbanswer = geomongo.get_ads(**dbrequest)
     return json.dumps(dbanswer)
 
-@app.post('/ads')
+@app.route('/ads', methods=['POST'])
 def post_ad():
     #enable_cors()
     dbrequest = json.loads(request.params.keys()[0])
