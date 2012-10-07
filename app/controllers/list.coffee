@@ -22,6 +22,15 @@ class List extends Spine.Controller
 
     @append @maincontent
 
+    @maincontent.masonry
+        itemSelector: ".preview"
+        isFitWidth: true
+        #isAnimated: true
+        #animationOptions:
+        #  duration: 280
+        #  easing: "linear"
+        #  queue: true
+
     # # # # #
     # Global Events attached to Spine
     Spine.bind 'refreshList', -> @refreshList
@@ -36,25 +45,29 @@ class List extends Spine.Controller
     #@delay(, 600)    #TODO: Make it leaner!
     #else
     
-    
-    
-
+  appendOne: (item) =>
+    if item
+      listitem = new ListItem(item: item)
+      brick = listitem.render()
+      #@maincontent.append()
+      @maincontent.append( brick.el ).masonry( 'appended', brick.el, true )
+      #@maincontent.masonry('reload')
 
   addOne: (item) =>
     if item
       listitem = new ListItem(item: item)
       brick = listitem.render()
-      @maincontent.append(brick.el)
-      @maincontent.masonry('reload')
+      #@maincontent.append(brick.el)#.masonry('reload')
+      @maincontent.append( brick.el ).masonry( 'appended', brick.el, true )
 
       
 
   addAll: =>
     @maincontent.empty()
-    @maincontent.masonry
-        itemSelector: ".preview"
-    Ad.each(@addOne)
-    @maincontent.masonry('reloadItems')
+    @addOne(ad) for ad in Ad.all()
+    @maincontent.imagesLoaded =>
+      @maincontent.masonry('reload')
+    #@maincontent.masonry('reload')
     #@maincontent.imagesLoaded =>
     #  @maincontent.masonry
     #    itemSelector: ".preview"

@@ -1,8 +1,8 @@
 (->
   $ = jQuery
   defaults =
-    width: 220
-    height: 120
+    width: 240
+    height: 240
 
   $.fn.gfxFlip = (options) ->
     options = {}  unless options?
@@ -24,7 +24,7 @@
       "-moz-transform-origin": "50% 50%"
       #width: opts.width
       width: opts.width
-      height: getHeight(front)
+      height: 240#getHeight(front)
 
     front.add(back).css
       position: "absolute"
