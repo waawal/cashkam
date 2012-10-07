@@ -38,7 +38,7 @@ def get_ads():
         #dbrequest['radius'] = int(float(request.query.get('radius')))
         dbrequest['categories'] = request.query.get('categories').split(',')
         dbrequest['q'] = request.query.get('q')
-        pprint(dbrequest)
+        #pprint(dbrequest)
         dbanswer = geomongo.get_ads(**dbrequest)
         return json.dumps(dbanswer)
 
