@@ -1,0 +1,2 @@
+# To log in and forward circus stats port - 
+ssh danielwa@api.cashkam.alpha.massforstroel.se -L 8989:127.0.0.1:8989
