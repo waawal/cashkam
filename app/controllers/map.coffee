@@ -49,6 +49,7 @@ class Map extends Spine.Controller
       minZoom: 3
       attributionControl: false
       zoomControl: false
+      scrollWheelZoom: false
       doubleClickZoom: true
       )
     zoom = new L.Control.Zoom(position: 'topright')
