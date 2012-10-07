@@ -35,11 +35,11 @@ class ListItem extends Spine.Controller
   # Picked up by map Controller    WARNING - Global Events!
   addMarker: =>
     @marker = new L.Marker(@item.latlng)
-    #Spine.trigger('showMarker', @marker)
-    @log "addMarker"
+    Spine.trigger('showMarker', @marker)
+    #@log "addMarker"
   removeMarker: =>
     #@log @marker
-    #Spine.trigger('removeMarker', @marker)
-    @log "removeMarker"
+    Spine.trigger('removeMarker', @marker)
+    #@log "removeMarker"
     
 module.exports = ListItem
