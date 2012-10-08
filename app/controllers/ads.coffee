@@ -41,6 +41,7 @@ class Ads extends Spine.Controller
 
 
   queryForAds: =>
+    Spine.trigger('global:new-search')
     data = @getData()
     Ad.deleteAll() #invalidate :-/
     Ad.fetch(

@@ -52,7 +52,7 @@ class Map extends Spine.Controller
       scrollWheelZoom: false
       doubleClickZoom: false
       )
-    zoom = new L.Control.Zoom(position: 'topright')
+    zoom = new L.Control.Zoom(position: 'bottomleft')
     zoom.addTo(map)
 
     # Raster tiles
@@ -66,7 +66,8 @@ class Map extends Spine.Controller
     map.measure = new L.Control.Scale
       metric: true
       imperial: false
-      maxWidth: 200
+      maxWidth: 160
+      position: 'bottomright'
     map.measure.addTo(map)
 
     map.locate(
@@ -95,9 +96,11 @@ class Map extends Spine.Controller
     @location = latlng
     @map.meMarker = new L.marker(@location,
       icon: @map.meicon
-      clickable: false
+      clickable: true
       title: "You!"
+      draggable: true
       )
+    @map.meMarker.on 'dragend', (e) => Spine.trigger("global:position-changed", e)
     @map.meMarker.addTo(@map)
     @trigger "search"
 

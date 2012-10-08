@@ -34,16 +34,12 @@ class List extends Spine.Controller
     # # # # #
     # Global Events attached to Spine
     Spine.bind 'refreshList', -> @refreshList
+    Spine.bind 'global:new-search', -> @refreshList
     # # # # #
 
 
   refreshList: (refreshType) =>
-    #@log "refresh"
-    #if refreshType is 'refresh'
-    @maincontent.masonry('reload')
-    #@maincontent.masonry('reload')
-    #@delay(, 600)    #TODO: Make it leaner!
-    #else
+    @$el.fadeOut('fast')
     
   appendOne: (item) =>
     if item

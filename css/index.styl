@@ -1,5 +1,5 @@
-@import 'normalize.css'
-@import 'main.css'
+@import 'css/normalize.css'
+@import 'css/main.css'
 @import './mixin'
 @import './jqueryui'
 @import '../node_modules/nib/lib/nib'
@@ -107,9 +107,14 @@ body
 //  margin 10px
 #map-back
   display none 
-  margin 10px
-  //box-shadow 2px 2px 1px rgba(0,0,0,0.15)
+  //margin 10px
+  box-shadow 2px 2px 2px rgba(0,0,0,0.10)
   display block
+  width 240px
+  height 240px
+  background #fff
+  background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
+  //visibility hidden
 
 #wrapper
   absolute top 40px bottom 40px
