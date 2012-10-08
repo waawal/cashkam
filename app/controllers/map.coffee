@@ -20,7 +20,20 @@ class Map extends Spine.Controller
 
   constructor: ->
     super
-    @browseButton.html '<button id="browse">Browse</button><br><button id="flip">Flip!</button>'
+    @browseButton.html '<button id="browse" class="btn btn-large btn-block">Browse</button><br><button id="flip" class="btn btn-mini">Flip!</button>'
+
+    btnGroup = '''
+    <div class="btn-group row-fluid">
+      <button class="btn btn-large" id="browse">Browse</button>
+      <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <!-- dropdown menu links -->
+          <li id="flip"><a href="#">Saved Searches</a></li>
+      </ul>
+    </div>
+    '''
     #@mapFront.html '<div class="front"><div>'
     #@mapBack.html '<div class="back"><div>'
     
@@ -52,7 +65,7 @@ class Map extends Spine.Controller
       scrollWheelZoom: false
       doubleClickZoom: false
       )
-    zoom = new L.Control.Zoom(position: 'bottomleft')
+    zoom = new L.Control.Zoom(position: 'topleft')
     zoom.addTo(map)
 
     # Raster tiles
