@@ -21,7 +21,7 @@ class Map extends Spine.Controller
 
   constructor: ->
     super
-    @browseButton.html '<button id="browse" class="btn btn-large btn-block btn-success">Browse</button>'
+    #@browseButton.html '<button id="browse" class="btn btn-large btn-block btn-success">Browse</button>'
 
     #@mapFront.html '<div class="front"><div>'
     @mapBack.html '''
@@ -50,28 +50,34 @@ class Map extends Spine.Controller
     $menuBar = '''
     <div class="navbar" id="navigation-box">
       <div class="navbar-inner" id="main-nav">
+          
         <ul class="nav">
-          <li><a href="#" id="flip"><i class="icon-list"></i></a></li>
+          <li id="flip"><a href="#"><i class="icon-list"></i></a></li>
         </ul>
-        <a class="brand" href="#">CashKamera</a>
+          <!-- <a class="brand" href="#">CashKam</a> --!>
+          <button class="btn btn-success btn-mini pull-right" id="browse">Browse</button>
+        
       </div>
     </div>
     '''
-    @append $menuBar, @mapframe, @browseButton, @categories
+    @append $menuBar, @mapframe, @categories#, @browseButton
     $("#map-frame").gfxFlip()
-    #$('#browse').slideUp(1)
+    #$('#flip').click (event) =>
+    #  @flipMap(event)
+      #false
+
 
   flipMap: (event) =>
-    event.preventDefault()
     if $('#flip').hasClass('active')
       $('#flip').removeClass('active')
+      @map.setView(@map.getCenter(), @map.getZoom(), true) # Force reset! (ugly, change when upstream offers...)
     else
       $("#flip").addClass("active")
     $("#map-frame").trigger("flip")
     $('#browse').fadeToggle 120
     @categories.fadeToggle 120
-    @map.invalidateSize(false)
-    false
+    $(event.target).addClass "active"  unless $(event.target).hasClass("active")
+    event.preventDefault()
 
   createMap: =>
     map = L.map('map',
@@ -81,7 +87,7 @@ class Map extends Spine.Controller
       minZoom: 3
       attributionControl: false
       zoomControl: true
-      scrollWheelZoom: false
+      #scrollWheelZoom: false
       doubleClickZoom: false
       )
     #zoom = new L.Control.Zoom(position: 'topleft')
@@ -99,7 +105,7 @@ class Map extends Spine.Controller
       metric: true
       imperial: false
       maxWidth: 160
-      position: 'bottomright'
+      position: 'bottomleft'
     map.measure.addTo(map)
 
     map.locate(
@@ -120,6 +126,7 @@ class Map extends Spine.Controller
     #map.on('click', (e) =>
     #  map.panTo(e.latlng)
     #  )
+    map.scrollWheelZoom.disable()  unless L.Browser.webkit
     map
 
 
