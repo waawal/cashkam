@@ -14,7 +14,7 @@ class Ads extends Spine.Controller
     @categories = new Categories(el: $("#categories"))
     @map.bind "search", @queryForAds
     @categories.bind "new:ad", @createAd
-    @append @map, @categories
+    @append @map, #@categories
 
 
   getData: =>

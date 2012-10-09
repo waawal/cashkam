@@ -9,8 +9,8 @@ class ListItem extends Spine.Controller
 
 
   events:
-    "mouseenter img": "addMarker"
-    "mouseleave img": "removeMarker"
+    "mouseenter": "addMarker"
+    "mouseleave": "removeMarker"
 
   # Bind events to the record
   constructor: ->

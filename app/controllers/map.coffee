@@ -13,6 +13,7 @@ class Map extends Spine.Controller
     '#map-frame': 'mapframe'
     '#map-front': 'mapFront'
     '#map-back': 'mapBack'
+    '#categories': 'categories'
 
   events:
     "click #browse": "search"
@@ -20,35 +21,22 @@ class Map extends Spine.Controller
 
   constructor: ->
     super
-    @browseButton.html '<button id="browse" class="btn btn-large btn-block">Browse</button>'
+    @browseButton.html '<button id="browse" class="btn btn-large btn-block btn-success">Browse</button>'
 
-    btnGroup = '''
-    <div class="btn-group row-fluid">
-      <button class="btn btn-large" id="browse">Browse</button>
-      <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <!-- dropdown menu links -->
-          <li id="flip"><a href="#">Saved Searches</a></li>
-      </ul>
-    </div>
-    '''
     #@mapFront.html '<div class="front"><div>'
     @mapBack.html '''
-    <ul class="nav nav-list">
+    <ul class="nav nav-list" id="nav-list">
       <li class="nav-header">Ad Browser</li>
-      <li><a href="#">Ad Flow</a></li>
-      <li class="active"><a href="#">Detailed Search</a></li>
+      <li class="active"><a href="#"><i class="icon-globe"></i> Ad Flow</a></li>
+      <li><a href="#"><i class="icon-search"></i> Search</a></li>
       <li class="nav-header">Me</li>
-      <li><a href="#">My Ads</a></li>
-      <li><a href="#">My Saved searches</a></li>
-      <li><a href="#">Stream</a></li>
+      <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
+      <li><a href="#"><i class="icon-camera"></i> My Ads</a></li>
+      <li><a href="#"><i class="icon-heart"></i> My Lists</a></li>
       <li class="divider"></li>
       <li><a href="#">Help</a></li>
     </ul>
     '''
-    #'<div class="back"><div>'
     
     @map = new @createMap
     
@@ -57,34 +45,33 @@ class Map extends Spine.Controller
     Spine.bind 'showMarker', (marker) => @map.addLayer(marker)
     Spine.bind 'removeMarker', (marker) => @map.removeLayer(marker)
     # # # # #
-    '''
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Help</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </li>
-    </ul>
-    '''
-    $flipbutton = $('<button id="flip" class="btn btn-mini btn-block">Menu</button>')
-    @append $flipbutton, @mapframe, @browseButton
-    $("#map-frame").gfxFlip()
 
-  flipMap: =>
+    #$flipbutton = $('<button id="flip" class="btn btn-mini btn-block">Menu</button>')
+    $menuBar = '''
+    <div class="navbar" id="navigation-box">
+      <div class="navbar-inner" id="main-nav">
+        <ul class="nav">
+          <li><a href="#" id="flip"><i class="icon-list"></i></a></li>
+        </ul>
+        <a class="brand" href="#">CashKamera</a>
+      </div>
+    </div>
+    '''
+    @append $menuBar, @mapframe, @browseButton, @categories
+    $("#map-frame").gfxFlip()
+    #$('#browse').slideUp(1)
+
+  flipMap: (event) =>
+    event.preventDefault()
     if $('#flip').hasClass('active')
       $('#flip').removeClass('active')
     else
       $("#flip").addClass("active")
     $("#map-frame").trigger("flip")
-    $('#browse').slideToggle(120)
+    $('#browse').fadeToggle 120
+    @categories.fadeToggle 120
     @map.invalidateSize(false)
+    false
 
   createMap: =>
     map = L.map('map',
@@ -93,12 +80,12 @@ class Map extends Spine.Controller
       maxZoom: 14
       minZoom: 3
       attributionControl: false
-      zoomControl: false
+      zoomControl: true
       scrollWheelZoom: false
       doubleClickZoom: false
       )
-    zoom = new L.Control.Zoom(position: 'topleft')
-    zoom.addTo(map)
+    #zoom = new L.Control.Zoom(position: 'topleft')
+    #zoom.addTo(map)
 
     # Raster tiles
     L.tileLayer(

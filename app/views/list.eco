@@ -1,16 +1,32 @@
-<% dist = @distance ? 0.0 %>
+<% dist = @distance?.toFixed(0) ? "?" %>
+  <div class="image">
+    <img src="<%= @media %>" width="200" height="200">
 
-  <img src="<%= @media %>">
-  <div class="details">
-      <a class="btn btn-small" href="#"><i class="icon-star-empty"></i></a>
-      <a class="btn btn-small" href="#"><i class="icon-user"></i></a>
-      <i class="icon-map-marker"></i>
+  <div class="image-header">
+      <span class="pull-left">
+        <i class="icon-time icon-white"></i> 
+          Three hours ago
+        </span>
+      <i class="icon-map-marker icon-white"></i>
       <span class="distance">
-        approx. <%= dist.toFixed(0) %> km
+        <%= dist %> km
       </span>
+    </div>
+
+    <div class="image-footer">
+      <a class="btn btn-small href="#"><i class="icon-star-empty"></i></a>
+    </div>
   </div>
 
-  <p class="description">
+  <div class="details-top">
+    <span class="label">Interior Design</span>
+  </div>
+
+  <div class="description">
     <%= @text %>
-  </p>
-  <span class="label">More</span>
+  </div>
+
+  <div class="details-bottom">
+    <a class="btn btn-small" href="#"><i class="icon-comment"></i></a>
+  </div>
+  

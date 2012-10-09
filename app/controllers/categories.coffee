@@ -13,15 +13,15 @@ class Categories extends Spine.Controller
   events: 
     "change input[type=checkbox]": "change"
     
-    "click #create": "createAd"
-    "click #show-categories": (e) => $("form").slideToggle("slow")
+    #"click #create": "createAd"
+    #"click #show-categories": (e) => $("form").slideToggle("slow")
 
 
   constructor: ->
     super
     @status = {}
     @html require('views/categories')()
-    $("form").hide()
+    #$("form").hide()
 
 
   change: (e) =>

@@ -1,9 +1,8 @@
-<button id="show-categories">Search</button>
 <form>
     <p>
-        <input type="search" placeholder="search" results="0" incremental="true">
+        <!-- <input type="search" placeholder="search" results="0" incremental="true">
             <br>
-
+            --!>
         <label><input type="checkbox" name="1" id="1"> 
         Clothing, Accessories & Beauty</label>
         <br>
@@ -39,5 +38,4 @@
         <label><input type="checkbox" name="9" id="9"> 
         Everything Else</label>
     </p>
-    <button id="create">Create Ad</button>
 </form>

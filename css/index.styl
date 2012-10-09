@@ -1,5 +1,5 @@
-@import 'css/normalize.css'
-@import 'css/main.css'
+//@import 'css/normalize.css'
+//@import 'css/main.css'
 @import './mixin'
 @import './jqueryui'
 @import '../node_modules/nib/lib/nib'
@@ -24,6 +24,14 @@ body
   font-weight 400
   //font-family "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important
 
+#navigation-box
+  margin-top 0px;
+  margin-bottom 10px
+
+#main-nav
+  padding-right 0px
+  padding-left 0px
+
 #map-frame
   height 240px
   width 240px
@@ -39,10 +47,12 @@ body
 //#map:full-screen { width: 100% !important height: 100% !important }
 
 #contentwrapper
-  padding 0px 20px 20px 280px
+  padding 0px 0px 20px 280px
 
 #maincontent
   position: relative
+  top 20px
+  padding-bottom 40px
 
   .preview
     display: block
@@ -53,24 +63,57 @@ body
     background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
     box-shadow 2px 2px 1px rgba(0,0,0,0.1)
     border 1px solid #DEDEDE
-    img
-      display: block
-      width 200px
-      height 200px
-      border-radius 2px
-      display block
-    .distance
-      text-align right
-      font-size 10px
-      line-height 12px
-    .description
-      padding 10px 5px 0px 5px
-      font-family 'Indie Flower', cursive
-      font-size 18px
-      line-height 21px
-      width: 190px
-    .details
-      padding 10px 0px 10px 0px
+.description
+  font-family 'Indie Flower', cursive
+  font-size 18px
+  line-height 19px
+  //padding 0px 5px 0px 5px
+.details-bottom
+  padding-top 10px
+
+.details-top
+  padding 10px 0px 10px 0px
+
+.image
+  width 200px
+  height 200px
+  border-radius 2px
+  display block
+  position: relative
+  img
+    width 200px
+    height 200px
+    border-radius 2px
+    display block
+  .image-header
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.90)
+    border-radius 2px
+    color: #fff
+    position: absolute
+    top: 0px
+    left: 0px
+    right: 0px
+    height: 60px
+    padding: 7px
+    vbg-gradient(rgba(0, 0, 0, 255), rgba(0, 0, 0, 0))
+    text-align right
+    font-size 12px
+    line-height 12px
+    opacity 0.4
+  .image-footer
+    border-radius 2px
+    color: #fff
+    position: absolute
+    bottom: 0px
+    left: 0px
+    right: 0px
+    padding: 7px
+    //vbg-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 255))
+    text-align right
+    font-size 10px
+    line-height 12px
+    //opacity 0.2
+
 
 
 #map-front
@@ -90,44 +133,44 @@ body
   background #fff
   background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
 
-#wrapper
-  absolute top 40px bottom 40px
-  position relative
-  width 100%
+//#wrapper
+//  absolute top 40px bottom 40px
+//  position relative
+//  width 100%
 
 #sidebar
-  display: block
-  position fixed
+  position fixed 
   z-index: 100
-  width 260px
-  height 100%
+  display: block
+  width 240px
+  //height 100%
   margin-left 20px
 
   input[type=search]
     margin-bottom 10px
+  label
+    display inline
   #categories
-    margin-top 10px
-    margin-bottom 20px
-    position fixed
-    bottom 20px
-    width 260px
+    position relative
+    //bottom 20px
+    //width 260px
   #map-holder
-    position fixed
-    top 40px
+    position relative
+    top 30px
     width 240px
 
 #browse-button
-  margin-top 10px
+  margin-top 20px
+  margin-bottom 20px
+  //display none
 
-#flip
-  margin-bottom 10px
 
 .fadeout
   z-index 50
   position fixed
   left 0
   right 0
-  height 40px
+  height 20px
 
 .bottom
   bottom 0
