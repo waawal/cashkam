@@ -3,23 +3,26 @@
     <img src="<%= @media %>" width="200" height="200">
 
   <div class="image-header">
-      <span class="pull-left">
-        <i class="icon-time icon-white"></i> 
-          Three hours ago
-        </span>
-      <i class="icon-map-marker icon-white"></i>
-      <span class="distance">
-        <%= dist %> km
-      </span>
-    </div>
+    <i class="icon-tag icon-white"></i> Interior Design
+    <!-- <span class="pull-right" ><i class="icon-star-empty icon-white"></i> --!>
+  </div>
 
     <div class="image-footer">
-      <a class="btn btn-small href="#"><i class="icon-star-empty"></i></a>
+        <i class="icon-time icon-white"></i> 
+          Three hours ago
+    </div>
+    <div class="image-footer">
+      <span class="pull-right">
+        <i class="icon-map-marker icon-white"></i>
+        <span class="distance">
+          <%= dist %> km
+        </span>
+      </span>
     </div>
   </div>
 
   <div class="details-top">
-    <span class="label">Interior Design</span>
+    bla bla bla.
   </div>
 
   <div class="description">

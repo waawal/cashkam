@@ -86,12 +86,12 @@ class Map extends Spine.Controller
       maxZoom: 14
       minZoom: 3
       attributionControl: false
-      zoomControl: true
+      zoomControl: false
       #scrollWheelZoom: false
       doubleClickZoom: false
       )
-    #zoom = new L.Control.Zoom(position: 'topleft')
-    #zoom.addTo(map)
+    zoom = new L.Control.Zoom(position: 'bottomright')
+    zoom.addTo(map)
 
     # Raster tiles
     L.tileLayer(
@@ -105,7 +105,7 @@ class Map extends Spine.Controller
       metric: true
       imperial: false
       maxWidth: 160
-      position: 'bottomleft'
+      position: 'topright'
     map.measure.addTo(map)
 
     map.locate(
