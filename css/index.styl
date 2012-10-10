@@ -24,6 +24,14 @@ body
   font-weight 400
   //font-family "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important
 
+li
+  cursor: hand
+  cursor: pointer
+
+#logo
+  padding-left 20px
+  padding-right 20px
+  margin-left 0px
 
 #navigation-box
   margin-top 0px;
@@ -70,9 +78,10 @@ body
     box-shadow 2px 2px 1px rgba(0,0,0,0.1)
     border 1px solid #DEDEDE
 .description
-  font-family 'Indie Flower', cursive
+  
   font-size 18px
   line-height 19px
+  //font-family 'Indie Flower', cursive
   //padding 0px 5px 0px 5px
 .details-bottom
   padding-top 10px
@@ -104,7 +113,17 @@ body
     vbg-gradient(rgba(0, 0, 0, 255), rgba(0, 0, 0, 0))
     font-size 10px
     line-height 12px
-    opacity 0.4
+    //opacity 0.4
+
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.37) 53%, rgba(0,0,0,0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.58)), color-stop(53%,rgba(0,0,0,0.37)), color-stop(100%,rgba(0,0,0,0)));
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.58) 0%,rgba(0,0,0,0.37) 53%,rgba(0,0,0,0) 100%);
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.58) 0%,rgba(0,0,0,0.37) 53%,rgba(0,0,0,0) 100%);
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.58) 0%,rgba(0,0,0,0.37) 53%,rgba(0,0,0,0) 100%);
+    //background: linear-gradient(to bottom,  rgba(0,0,0,0.58) 0%,rgba(0,0,0,0.37) 53%,rgba(0,0,0,0) 100%);
+    //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94000000', endColorstr='#00000000',GradientType=0 );
+
+
   .image-footer
     border-radius 2px
     color: #fff
@@ -168,6 +187,7 @@ body
     top 30px
     width 240px
 
+
 #browse
   margin-top 8px
   //margin-top 20px
@@ -196,3 +216,33 @@ body
 
 //.leaflet-control-zoom-fullscreen.last
 //  margin top 5px
+
+
+
+/**** Transitions 
+
+.masonry,
+.masonry .masonry-brick {
+  -webkit-transition-duration: 0.7s;
+     -moz-transition-duration: 0.7s;
+      -ms-transition-duration: 0.7s;
+       -o-transition-duration: 0.7s;
+          transition-duration: 0.7s;
+}
+
+.masonry {
+  -webkit-transition-property: opacity, right;
+     -moz-transition-property: opacity, right;
+      -ms-transition-property: opacity, right;
+       -o-transition-property: opacity, right;
+          transition-property: opacity, right;
+}
+
+.masonry .masonry-brick {
+  -webkit-transition-property: left, right, opacity;
+     -moz-transition-property: left, right, opacity;
+      -ms-transition-property: left, right, opacity;
+       -o-transition-property: left, right, opacity;
+          transition-property: left, right, opacity;
+}
+****/

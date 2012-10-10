@@ -47,6 +47,7 @@ class List extends Spine.Controller
       brick = listitem.render()
       #@maincontent.append()
       @maincontent.append( brick.el ).masonry( 'appended', brick.el, true )
+      @maincontent.masonry('reloadItems')
       #@maincontent.masonry('reload')
 
   addOne: (item) =>
@@ -56,13 +57,16 @@ class List extends Spine.Controller
       #@maincontent.append(brick.el)#.masonry('reload')
       @maincontent.append( brick.el ).masonry( 'appended', brick.el, true )
 
+
       
 
   addAll: =>
-    @maincontent.empty()
+    #@maincontent.empty()
+    #@maincontent.masonry('reload')
     @addOne(ad) for ad in Ad.all()
     @maincontent.imagesLoaded =>
       @maincontent.masonry('reload')
+    #@maincontent.masonry('reload')
     #@maincontent.masonry('reload')
     #@maincontent.imagesLoaded =>
     #  @maincontent.masonry

@@ -27,14 +27,14 @@ class Map extends Spine.Controller
     @mapBack.html '''
     <ul class="nav nav-list" id="nav-list">
       <li class="nav-header">Ad Browser</li>
-      <li class="active"><a href="#"><i class="icon-globe"></i> Ad Flow</a></li>
-      <li><a href="#"><i class="icon-search"></i> Search</a></li>
+      <li class="active"><a><i class="icon-globe"></i> Ad Flow</a></li>
+      <li><a><i class="icon-search"></i> Search</a></li>
       <li class="nav-header">Me</li>
-      <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
-      <li><a href="#"><i class="icon-camera"></i> My Ads</a></li>
-      <li><a href="#"><i class="icon-heart"></i> My Lists</a></li>
+      <li><a><i class="icon-envelope"></i> Inbox</a></li>
+      <li><a><i class="icon-camera"></i> My Ads</a></li>
+      <li><a><i class="icon-heart"></i> My Lists</a></li>
       <li class="divider"></li>
-      <li><a href="#">Help</a></li>
+      <li><a>Help</a></li>
     </ul>
     '''
     
@@ -52,9 +52,9 @@ class Map extends Spine.Controller
       <div class="navbar-inner" id="main-nav">
           
         <ul class="nav">
-          <li id="flip"><a href="#"><i class="icon-list"></i></a></li>
+          <li id="flip"><a title="Toggle Map/Menu"><i class="icon-list"></i></a></li>
         </ul>
-          <!-- <a class="brand" href="#">CashKam</a> --!>
+          <!-- <a class="brand" >CashKam</a> --!>
           <button class="btn btn-success btn-mini pull-right" id="browse">Browse</button>
         
       </div>
@@ -76,7 +76,8 @@ class Map extends Spine.Controller
     $("#map-frame").trigger("flip")
     $('#browse').fadeToggle 120
     @categories.fadeToggle 120
-    $(event.target).addClass "active"  unless $(event.target).hasClass("active")
+    $(event.target).toggleClass("active")
+    #$(event.target).addClass "active"  unless $(event.target).hasClass("active")
     event.preventDefault()
 
   createMap: =>
@@ -145,8 +146,9 @@ class Map extends Spine.Controller
 
 
   search: (e) =>
+    $("html, body").animate {scrollTop: 0}, 40, =>
+      @trigger "search" # TODO: Not good at all... first point of optimization ;-)
+      #$("#maincontent").empty()
     e.preventDefault()
-    @trigger "search"
-
 
 module.exports = Map
