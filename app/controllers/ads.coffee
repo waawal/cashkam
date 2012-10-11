@@ -1,5 +1,5 @@
 Spine = require('spine')
-require('lib/jquery-ui')
+
 Map = require('controllers/map')
 Ad = require 'models/ad'
 Categories = require 'controllers/categories'
@@ -12,9 +12,12 @@ class Ads extends Spine.Controller
     @map = new Map (el: $("#map-holder"))
 
     @categories = new Categories(el: $("#categories"))
-    @map.bind "search", @queryForAds
+
+    Spine.bind 'global:fetchAds', @queryForAds
+    @map.bind "search", @queryForAds # replace with global?
     @categories.bind "new:ad", @createAd
     @append @map, #@categories
+
 
 
   getData: =>
