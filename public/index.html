@@ -17,7 +17,7 @@
     var exports = this;
     jQuery(function(){
       var App = require("index");
-      exports.app = new App({el: $("#wrapper")});      
+      exports.app = new App({el: $("body")});      
     });
   </script>
   
@@ -25,7 +25,7 @@
 </head>
   <body>
     <div class="fadeout top"></div>
-    <div id="wrapper">
+    <!-- <div id="wrapper"> -->
       <div id="sidebar">
         <div id="map-holder">
             <div id="map-frame">
@@ -66,7 +66,7 @@
         </ul>
 
       </div>
-    </div>
+    <!-- </div> -->
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
   </body>

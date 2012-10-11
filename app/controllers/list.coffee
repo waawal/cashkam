@@ -55,7 +55,7 @@ class List extends Spine.Controller
       listitem = new ListItem(item: item)
       brick = listitem.render()
       #@maincontent.append(brick.el)#.masonry('reload')
-      @maincontent.append( brick.el ).masonry( 'appended', brick.el, true )
+      @maincontent.append( brick.el ).masonry( 'appended', brick.el, false )
 
 
       

@@ -146,8 +146,8 @@ class Map extends Spine.Controller
 
 
   search: (e) =>
-    $("html, body").animate {scrollTop: 0}, 40, =>
-      @trigger "search" # TODO: Not good at all... first point of optimization ;-)
+    #$("html, body").animate {scrollTop: 0}, 40, =>
+    @trigger "search" # TODO: Not good at all... first point of optimization ;-)
       #$("#maincontent").empty()
     e.preventDefault()
 

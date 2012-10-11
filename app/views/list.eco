@@ -6,21 +6,24 @@
     <i class="icon-tag icon-white"></i> Interior Design
     <!-- <span class="pull-right" ><i class="icon-star-empty icon-white"></i> --!>
   </div>
+    <div class="image-footer">
 
-    <div class="image-footer">
-        <i class="icon-time icon-white"></i> 
-          Three hours ago
-    </div>
-    <div class="image-footer">
-      <span class="pull-right">
-        <i class="icon-map-marker icon-white"></i>
-        <span class="distance">
-          <%= dist %> km
+      <div class="pull-right">
+          <i class="icon-time icon-white"></i> 
+            Three hours ago
+      </div>
+
+      <div class="pull-right">
+        <span>
+          <i class="icon-map-marker icon-white"></i>
+          <span class="distance">
+            <%= dist %> km
+          </span>
         </span>
-      </span>
+      </div>
+      
     </div>
-  </div>
-
+</div>
   <div class="details-top">
     bla bla bla.
   </div>
