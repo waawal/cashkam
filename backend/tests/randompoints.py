@@ -80,7 +80,7 @@ for x in range(0,numpoints):
     'category': random.randint(0,9)
     }
     print jsondump(rec)
-    r = requests.post("http://emea-fr-01.services.massforstroel.se/ads", data=rec)
+    r = requests.post("http://emea-fr-01.services.massforstroel.se/ads", data=jsondump(rec))
     print r.text
 #f.close()
 
