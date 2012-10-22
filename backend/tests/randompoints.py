@@ -5,6 +5,8 @@ from json import dumps as jsondump
 import urllib2
 import xml.sax
 
+import requests
+
 def get_lipsum(howmany, what, start_with_lipsum):
         
     class XmlHandler(xml.sax.handler.ContentHandler):
@@ -78,6 +80,8 @@ for x in range(0,numpoints):
     'category': random.randint(0,9)
     }
     print jsondump(rec)
+    r = requests.post("http://emea-fr-01.services.massforstroel.se/ads", data=rec)
+    print r.text
 #f.close()
 
 print "Script Complete, Hooray!", numpoints, "random points generated"

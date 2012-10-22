@@ -8,7 +8,7 @@ db.places.create_index([("loc", GEO2D)])
 
 EARTH_RADIUS = 6378.0
 
-def post_ad(media, lat, lng, , category, text=None):
+def post_ad(media, lat, lng, category, text=None):
     result = str(db.places.insert({"media": media, "loc": [lat, lng], "text": text, "category": category}))
     db.places.ensure_index([("loc", GEO2D)])
     return {'id': result}
