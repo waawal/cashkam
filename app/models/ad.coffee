@@ -1,7 +1,7 @@
 Spine = require('spine')
 
 # Remove later
-Spine.Model.host = "http://api.cashkam.alpha.massforstroel.se"
+Spine.Model.host = "http://emea-fr-01.services.massforstroel.se"
 
 class Ad extends Spine.Model
   @configure 'Ad', 'username', 'media', 'text', 'category', 'lat', 'lng'

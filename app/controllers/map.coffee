@@ -4,6 +4,7 @@ L = require ('lib/leaflet')
 require('lib/jquery-ui')
 require 'lib/gfx'
 require 'lib/gfx.flip'
+require 'lib/easing'
 
 class Map extends Spine.Controller
   #className: "side-map"
@@ -42,8 +43,8 @@ class Map extends Spine.Controller
     
     # # # # #
     # Global Events attached to Spine :-( Coming from listitem controller
-    Spine.bind 'showMarker', (marker) => @map.addLayer(marker)
-    Spine.bind 'removeMarker', (marker) => @map.removeLayer(marker)
+    Spine.bind 'showMarker', (marker) => @checkIfFetching(marker, "show")
+    Spine.bind 'removeMarker', (marker) => @checkIfFetching(marker, "hide")
     # # # # #
 
     #$flipbutton = $('<button id="flip" class="btn btn-mini btn-block">Menu</button>')
@@ -62,11 +63,17 @@ class Map extends Spine.Controller
     '''
     @append $menuBar, @mapframe, @categories#, @browseButton
     $("#map-frame").gfxFlip()
+    @fetching = false
     #$('#flip').click (event) =>
     #  @flipMap(event)
       #false
 
-
+  checkIfFetching: (marker, action="show") =>
+    unless @fetching
+      if action is "show"
+        @map.addLayer(marker)
+      else
+        @map.removeLayer(marker)
   flipMap: (event) =>
     if $('#flip').hasClass('active')
       $('#flip').removeClass('active')
@@ -146,9 +153,14 @@ class Map extends Spine.Controller
 
 
   search: (e) =>
-    #$("html, body").animate {scrollTop: 0}, 40, =>
-    @trigger "search" # TODO: Not good at all... first point of optimization ;-)
-      #$("#maincontent").empty()
+    @fetching = true
+    $("#maincontent").fadeToggle(600, 'easeOutQuart')
+    $("html, body").animate scrollTop: 0, 600, 'easeInOutCubic', =>
+      $("#maincontent").empty()
+      @trigger "search" # TODO: Not good at all... first point of optimization ;-)
+      $("#maincontent").fadeIn(400, 'easeInOutQuint', => @fetching = false)
+    #$("#maincontent").empty()
     e.preventDefault()
+    @fetching = false
 
 module.exports = Map
