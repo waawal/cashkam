@@ -45,7 +45,7 @@ def get_ads():
 @app.route('/ads', method=['POST'])
 def post_ad():
     dbrequest = json.loads(request.params.keys()[0])
-    if 'id' in dbrequest
+    if 'id' in dbrequest:
         del dbrequest['id']
     dbanswer = geomongo.post_ad(**dbrequest)
     return json.dumps(dbanswer)
