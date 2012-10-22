@@ -52,7 +52,7 @@ Returns a tuple with the generated text on the 0 index and generation statistics
 #f = open("C:\\Data\\output\\spatial_random_sample.csv", 'w')
 
 #How many points will be generated
-numpoints = 10 #random.randint(0,1000)
+numpoints = 20000 #random.randint(0,1000)
 
 # Create the bounding box
 #set longitude values - Y values
@@ -76,7 +76,7 @@ for x in range(0,numpoints):
 #print >>f, x,",", random.uniform(minx,maxx),",",                      random.uniform(miny,maxy)
     rec = {'lat': random.uniform(minx,maxx), 'lng': random.uniform(miny,maxy),
     'media': 'http://placehold.it/200x200',
-    'text': get_lipsum(random.randint(8,140), 'bytes', 'no')[0],
+    'text': get_lipsum(random.randint(12,140), 'bytes', 'no')[0],
     'category': random.randint(0,9)
     }
     print jsondump(rec)

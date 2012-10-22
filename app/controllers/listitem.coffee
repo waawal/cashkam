@@ -45,7 +45,7 @@ class ListItem extends Spine.Controller
   
   updateDistance: (newPosition) =>
     latlng = newPosition.target.dragging._marker._latlng
-    $('.distance:first').html(@calculateDistance(latlng.lat, latlng.lng, @item.latlng[0], @item.latlng[1]).toString())
+    $('#distance').html(@calculateDistance(latlng.lat, latlng.lng, @item.latlng[0], @item.latlng[1]).toString())
 
   # Util methods
   calculateDistance: (lat1, lon1, lat2, lon2, unit='K') ->
@@ -61,6 +61,6 @@ class ListItem extends Spine.Controller
     dist = dist * 60 * 1.1515
     dist = dist * 1.609344  if unit is "K"
     dist = dist * 0.8684  if unit is "N"
-    dist
+    Math.round(Number(dist)) + " km"
 
 module.exports = ListItem

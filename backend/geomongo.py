@@ -19,7 +19,7 @@ def get_ads(swlat, swlng, nelat, nelng, categories, q):
     # JS= distances = db.runCommand({ geoNear : "points", near : [0, 0], spherical : true, maxDistance : range / earthRadius /* to radians */ }).results
 
     db.places.ensure_index([("loc", GEO2D)])
-    dbresult = db.places.find({"loc": {"$within": {"$box": box}}})
+    dbresult = db.places.find({"loc": {"$within": {"$box": box}}}).limit(20)
     #dbresult = db.command(SON([('$within', 'places'),
     #                ('$box', box),])
     #                )

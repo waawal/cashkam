@@ -13,10 +13,10 @@
             Three hours ago
       </div>
 
-      <div class="pull-right">
+      <div class="pull-left">
         <span>
           <i class="icon-map-marker icon-white"></i>
-          <span class="distance">
+          <span class="distance" id="distance">
             <%= dist %> km
           </span>
         </span>
