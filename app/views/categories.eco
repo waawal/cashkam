@@ -1,8 +1,8 @@
-<form>
+<!--<form>
     <p>
-        <!-- <input type="search" placeholder="search" results="0" incremental="true">
+         <input type="search" placeholder="search" results="0" incremental="true">
             <br>
-            --!>
+            
         
         <input type="checkbox" name="1" id="1"> 
         <label for="1">Clothing, Accessories & Beauty</label>
@@ -48,3 +48,18 @@
         <label for="9">Everything Else</label>
     </p>
 </form>
+--!>
+<ul class="nav nav nav-tabs nav-stacked">
+
+
+<li><a href="#">Clothing, Accessories & Beauty</a></li>
+<li><a href="#">Interior Design</a></li>
+<li><a href="#">Consumer Electronics</a></li>
+<li><a href="#">Home & Major Appliances</a></li>
+<li><a href="#">Music, Books & Media</a></li>
+<li><a href="#">Hobbies</a></li>
+<li><a href="#">Construction & Garden</a></li>
+<li><a href="#">Art, Antiques & DIY</a></li>
+<li><a href="#">Everything Else</a></li>
+
+</ul>
