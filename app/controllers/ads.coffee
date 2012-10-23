@@ -51,7 +51,5 @@ class Ads extends Spine.Controller
       processData:true
       data:data
       )
-
-
     
 module.exports = Ads

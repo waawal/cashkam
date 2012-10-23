@@ -7,6 +7,8 @@ class ListItem extends Spine.Controller
 
   className: "preview"
 
+  elements:
+    '.distance': 'distance'
 
   events:
     "mouseenter": "addMarker"
@@ -19,15 +21,17 @@ class ListItem extends Spine.Controller
     @item.bind("update", @render)
     @item.bind("destroy", @remove)
     Spine.bind 'global:position-changed', (newPosition) => @updateDistance(newPosition)
+    @point = new L.LatLng(@item.latlng[0], @item.latlng[1])
 
   # Render an element
   render: (item) =>
     @item = item if item
+    @item.distance = distance = Math.round(Number(@point.distanceTo(Spine.massforstroelse.currentLocation))/1000) + " km"
     @html(@template(@item))
     @
 
   template: (item) ->
-    require('views/list')(item)
+    require('views/brick')(item)
 
   # Called after an element is destroyed
   remove: ->
@@ -45,22 +49,7 @@ class ListItem extends Spine.Controller
   
   updateDistance: (newPosition) =>
     latlng = newPosition.target.dragging._marker._latlng
-    $('#distance').html(@calculateDistance(latlng.lat, latlng.lng, @item.latlng[0], @item.latlng[1]).toString())
-
-  # Util methods
-  calculateDistance: (lat1, lon1, lat2, lon2, unit='K') ->
-    radlat1 = Math.PI * lat1 / 180
-    radlat2 = Math.PI * lat2 / 180
-    radlon1 = Math.PI * lon1 / 180
-    radlon2 = Math.PI * lon2 / 180
-    theta = lon1 - lon2
-    radtheta = Math.PI * theta / 180
-    dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta)
-    dist = Math.acos(dist)
-    dist = dist * 180 / Math.PI
-    dist = dist * 60 * 1.1515
-    dist = dist * 1.609344  if unit is "K"
-    dist = dist * 0.8684  if unit is "N"
-    Math.round(Number(dist)) + " km"
+    distance = Math.round(Number(@point.distanceTo(latlng))/1000) + " km"
+    @distance.html distance
 
 module.exports = ListItem

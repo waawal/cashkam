@@ -889,7 +889,7 @@
           var doAnimate = $.support.transition && animate
 
           this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
-            .appendTo(document.body)
+            .appendTo($('#wrapper'))
 
           if (this.options.backdrop != 'static') {
             this.$backdrop.click($.proxy(this.hide, this))

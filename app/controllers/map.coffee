@@ -1,5 +1,6 @@
 Spine = require('spine')
 L = require ('lib/leaflet')
+Navigations = require ('controllers/navigations')
 
 require('lib/jquery-ui')
 require 'lib/gfx'
@@ -18,11 +19,11 @@ class Map extends Spine.Controller
 
   events:
     "click #browse": "search"
-    "click #flip": "flipMap"
+    #"click #flip": "flipMap"
 
   constructor: ->
     super
-    #@browseButton.html '<button id="browse" class="btn btn-large btn-block btn-success">Browse</button>'
+    @browseButton.html '<button id="browse" class="btn btn-large btn-block btn-success">Browse</button>'
 
     #@mapFront.html '<div class="front"><div>'
     @mapBack.html '''
@@ -31,49 +32,38 @@ class Map extends Spine.Controller
       <li class="active"><a><i class="icon-globe"></i> Ad Flow</a></li>
       <li><a><i class="icon-search"></i> Search</a></li>
       <li class="nav-header">Me</li>
-      <li><a><i class="icon-envelope"></i> Inbox</a></li>
+      <li><a><i class="icon-inbox"></i> Inbox</a></li>
       <li><a><i class="icon-camera"></i> My Ads</a></li>
       <li><a><i class="icon-heart"></i> My Lists</a></li>
       <li class="divider"></li>
-      <li><a>Help</a></li>
+      <li><a><i class="icon-book"></i> Help</a></li>
     </ul>
     '''
     
     @map = new @createMap
+    @menuBar = new Navigations
     
     # # # # #
     # Global Events attached to Spine :-( Coming from listitem controller
     Spine.bind 'showMarker', (marker) => @checkIfFetching(marker, "show")
     Spine.bind 'removeMarker', (marker) => @checkIfFetching(marker, "hide")
+    Spine.bind 'global:flip', (event) => @flipMap(event)
     # # # # #
 
-    #$flipbutton = $('<button id="flip" class="btn btn-mini btn-block">Menu</button>')
-    $menuBar = '''
-    <div class="navbar" id="navigation-box">
-      <div class="navbar-inner" id="main-nav">
-          
-        <ul class="nav">
-          <li id="flip"><a title="Toggle Map/Menu"><i class="icon-list"></i></a></li>
-        </ul>
-          <!-- <a class="brand" >CashKam</a> --!>
-          <button class="btn btn-success btn-mini pull-right" id="browse">Browse</button>
-        
-      </div>
-    </div>
-    '''
-    @append $menuBar, @mapframe, @categories#, @browseButton
+
+    @append @mapframe, @browseButton, @menuBar, @categories#, @browseButton
     $("#map-frame").gfxFlip()
     @fetching = false
     #$('#flip').click (event) =>
     #  @flipMap(event)
       #false
 
-  checkIfFetching: (marker, action="show") =>
+  checkIfFetching: (marker, action="show") => # is this working???
     unless @fetching
       if action is "show"
-        @map.addLayer(marker)
+        @map.markersLayer.addLayer(marker)
       else
-        @map.removeLayer(marker)
+        @map.markersLayer.removeLayer(marker)
   flipMap: (event) =>
     if $('#flip').hasClass('active')
       $('#flip').removeClass('active')
@@ -131,6 +121,8 @@ class Map extends Spine.Controller
       iconSize: [32, 32]
       iconAnchor: [16, 16]
     
+    map.markersLayer = L.layerGroup()
+    map.markersLayer.addTo(map)
     #map.on('click', (e) =>
     #  map.panTo(e.latlng)
     #  )
@@ -138,7 +130,8 @@ class Map extends Spine.Controller
     map
 
 
-  initialLocation: (latlng) =>
+  initialLocation: (latlng) => # Should handle errors if location not allowed !!!!!
+    Spine.massforstroelse.currentLocation = latlng
     @map.panTo(latlng)
     @location = latlng
     @map.meMarker = new L.marker(@location,
@@ -147,7 +140,9 @@ class Map extends Spine.Controller
       title: "You!"
       draggable: true
       )
-    @map.meMarker.on 'dragend', (e) => Spine.trigger("global:position-changed", e)
+    @map.meMarker.on 'dragend', (e) =>
+      Spine.trigger("global:position-changed", e)
+      Spine.massforstroelse.currentLocation = e.target.dragging._marker._latlng
     @map.meMarker.addTo(@map)
     @trigger "search"
 
@@ -158,9 +153,12 @@ class Map extends Spine.Controller
     $("html, body").animate scrollTop: 0, 600, 'easeInOutCubic', =>
       $("#maincontent").empty()
       @trigger "search" # TODO: Not good at all... first point of optimization ;-)
-      $("#maincontent").fadeIn(400, 'easeInOutQuint', => @fetching = false)
+      $("#maincontent").fadeIn(400, 'easeInOutQuint', =>
+        @fetching = false
+        @map.markersLayer.clearLayers()
+        )
     #$("#maincontent").empty()
     e.preventDefault()
-    @fetching = false
+    #@fetching = false
 
 module.exports = Map

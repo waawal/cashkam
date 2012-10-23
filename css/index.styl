@@ -7,6 +7,8 @@
 @import './Karla:400:700'
 @import './IndieFlower:400'
 
+
+
 html body
   margin 0
   padding 0
@@ -14,34 +16,62 @@ html body
   height 100%
 
 body
-  position: relative
+  position: absolute
   font-size 14px
   line-height 21px
-  color #333
-  background #f6f6f6
   background-image url('linen.jpeg')
+  color #333
+  //background #f6f6f6
   font-family "Karla", sans-serif
   font-weight 400
   //font-family "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important
 
+// Fix for modals with blur ***
+//body.modal-open
+//  overflow hidden
+
+.modal-backdrop, .modal-backdrop.fade
+  background-color: white
+  opacity: 0.6
+// Fix for modals with blur ***
+
+
 li
   cursor: hand
   cursor: pointer
+
+//For stacks
+.stack > *:not(.active) {
+  display: none
+}
+#wrapper
+  position: relative
+  margin 0
+  padding 0
+  width 100%
+  height 100%
+  //background-image url('linen.jpeg')
+  color #333
+  background-repeat repeat
+  //background #f6f6f6
 
 #logo
   padding-left 20px
   padding-right 20px
   margin-left 0px
 
-#navigation-box
-  margin-top 0px;
-  margin-bottom 8px
+//#navigation-box
+//  //margin-top 8px;
+//  //margin-bottom 8px
+//  //position fixed
+//  //right: 8px;
+//  //top: 0px;
 
 
 #main-nav
   
-  padding-left 0px
-  padding-right 8px
+  padding-left 20px
+  padding-right 20px
   background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
   background-repeat repeat
   box-shadow 2px 2px 1px rgba(0,0,0,0.10)
@@ -65,7 +95,7 @@ li
 
 #maincontent
   position: relative
-  top 20px
+  top 50px
   padding-bottom 40px
 
   .preview
@@ -195,12 +225,12 @@ li
     //width 260px
   #map-holder
     position relative
-    top 30px
+    top 60px
     width 240px
 
 
 #browse
-  margin-top 8px
+  margin-top 20px
   //margin-top 20px
   //margin-bottom 20px
   //display none
@@ -212,13 +242,14 @@ li
   left 0
   right 0
   height 20px
+  opacity 0.4
 
 .bottom
-  bottom 0
+  bottom 40px
   vbg-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 255))
 
 .top
-  top 0
+  top 40px
   vbg-gradient(rgba(255, 255, 255, 255), rgba(255, 255, 255, 0))
 
 
