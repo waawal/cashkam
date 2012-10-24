@@ -50,7 +50,7 @@ class Map extends Spine.Controller
     Spine.bind 'global:flip', (event) => @flipMap(event)
     # # # # #
 
-
+    @categories.hide() # Fix this soon ******
     @append @mapframe, @browseButton, @menuBar, @categories#, @browseButton
     $("#map-frame").gfxFlip()
     @fetching = false

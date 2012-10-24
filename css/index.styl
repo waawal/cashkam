@@ -27,8 +27,8 @@ body
   //font-family "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important
 
 // Fix for modals with blur ***
-//body.modal-open
-//  overflow hidden
+body.modal-open
+  overflow hidden
 
 .modal-backdrop, .modal-backdrop.fade
   background-color: white
@@ -211,6 +211,10 @@ li
   width 240px
   //height 100%
   margin-left 20px
+  bottom: 0px;
+  top: 0px;
+  //overflow-y: auto;
+  //overflow-x: hidden;
 
   input[type=search]
     margin-bottom 10px
@@ -242,15 +246,15 @@ li
   left 0
   right 0
   height 20px
-  opacity 0.4
+  opacity 0.3
 
 .bottom
-  bottom 40px
+  bottom 0px
   vbg-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 255))
 
 .top
   top 40px
-  vbg-gradient(rgba(255, 255, 255, 255), rgba(255, 255, 255, 0))
+  vbg-gradient(rgba(0, 0, 0, 255), rgba(0, 0, 0, 0))
 
 
 //.leaflet-control-zoom-fullscreen

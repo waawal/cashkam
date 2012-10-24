@@ -24,10 +24,10 @@ class App extends Spine.Controller
     $('#myModal').on 'show', =>
       $('#wrapper').blurjs
         radius: 5
-      $('#footer-controls').fadeToggle('slow')
+      #$('#footer-controls').fadeToggle('slow')
     $('#myModal').on 'hidden', =>
       $.blurjs 'reset'
-      $('#footer-controls').fadeToggle('slow')
+      #$('#footer-controls').fadeToggle('slow')
   
     # Global listeners
     Spine.bind 'global:position-changed', (newPosition) =>
