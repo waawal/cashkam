@@ -13,7 +13,7 @@ class Ads extends Spine.Controller
 
     #@categories = new Categories(el: $("#categories"))
 
-    Spine.bind 'global:fetchAds', @queryForAds
+    #Spine.bind 'global:fetchAds', @queryForAds
     @map.bind "search", @queryForAds # replace with global?
     #@categories.bind "new:ad", @createAd
     @append @map, #@categories
@@ -48,7 +48,7 @@ class Ads extends Spine.Controller
 
 
   queryForAds: =>
-    Spine.trigger('global:new-search')
+    #Spine.trigger('global:new-search')
     data = @getData()
     Ad.deleteAll() #invalidate :-/
     Ad.fetch(
