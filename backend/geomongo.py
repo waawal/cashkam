@@ -37,7 +37,7 @@ def post_ad(media, lat, lng, category, text=None):
 
 def get_ads(latlng, index):
     if not index:
-        dbresult = db.places.find({"loc": {"$near": [3, 6]}}).limit(30)
+        dbresult = db.places.find({"loc": {"$near": latlng}}).limit(30)
         result = []
         for rec in dbresult:
             #pprint(rec)
