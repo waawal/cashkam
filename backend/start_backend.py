@@ -32,7 +32,7 @@ def get_ads():
     else:
         #dbrequest = {}
         latlng = (float(request.query.get('lat')), float(request.query.get('lat')))
-        index = int(request.query.get('lat', False))
+        index = int(request.query.get('i', False))
         #dbrequest['swlat'] = float(request.query.get('swlat'))
         #brequest['swlng'] = float(request.query.get('swlng'))
         #dbrequest['nelat'] = float(request.query.get('nelat'))
