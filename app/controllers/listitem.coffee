@@ -9,10 +9,11 @@ class ListItem extends Spine.Controller
 
   elements:
     '.distance': 'distance'
+    #'.icon-info-sign': 'info'
 
   events:
-    "mouseenter": "addMarker"
-    "mouseleave": "removeMarker"
+    "click": "addMarker"
+    #"mouseleave": "removeMarker"
 
   # Bind events to the record
   constructor: ->

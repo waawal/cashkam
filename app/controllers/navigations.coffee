@@ -26,6 +26,10 @@ class Navigations extends Spine.Controller
         </ul>
 
         <ul class="nav pull-right">
+          <li><a title="Messages" id="top-messages">Inbox <span class="badge badge-important">6</span></a></li>
+
+          <li class="divider-vertical"></li>
+
           <li id="fat-menu" class="dropdown">
             <a id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown" title="Settings"><i class="icon-user"></i> Username <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
@@ -35,9 +39,6 @@ class Navigations extends Spine.Controller
               <li class="divider"></li>
               <li><a tabindex="-1">Log Out</a></li>
             </ul>
-
-          <li class="divider-vertical"></li>
-          <li><a title="Messages" id="top-messages">Inbox <span class="badge badge-important">6</span></a></li>
         </ul>
       </div>
     </div>

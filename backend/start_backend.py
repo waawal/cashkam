@@ -30,16 +30,19 @@ def get_ads():
     if request.method == 'OPTIONS':
         return {}
     else:
-        dbrequest = {}
-        dbrequest['swlat'] = float(request.query.get('swlat'))
-        dbrequest['swlng'] = float(request.query.get('swlng'))
-        dbrequest['nelat'] = float(request.query.get('nelat'))
-        dbrequest['nelng'] = float(request.query.get('nelng'))
+        #dbrequest = {}
+        latlng = (float(request.query.get('lat')), float(request.query.get('lat'))
+        index = int(request.query.get('lat', False))
+        #dbrequest['swlat'] = float(request.query.get('swlat'))
+        #brequest['swlng'] = float(request.query.get('swlng'))
+        #dbrequest['nelat'] = float(request.query.get('nelat'))
+        #dbrequest['nelng'] = float(request.query.get('nelng'))
         #dbrequest['radius'] = int(float(request.query.get('radius')))
-        dbrequest['categories'] = request.query.get('categories').split(',')
-        dbrequest['q'] = request.query.get('q')
+        #dbrequest['categories'] = request.query.get('categories').split(',')
+        #dbrequest['q'] = request.query.get('q')
         #pprint(dbrequest)
-        dbanswer = geomongo.get_ads(**dbrequest)
+        #dbanswer = geomongo.get_ads(**dbrequest)
+        dbanswer = geomongo.get_ads(latlng, index)
         return json.dumps(dbanswer)
 
 @app.route('/ads', method=['POST'])

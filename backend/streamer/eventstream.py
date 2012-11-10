@@ -18,9 +18,9 @@ pubsub.subscribe('eventstream')
 
 def sender_service():
     for message in pubsub.listen():
-        if message['type'] == 'message':
+        if message['type'] in ['message', 'pmessage']:
             data = message['data']
-            user, msg = data.split(':')[0]
+            user, msg = data.split(':')[0], data.split(':')[1::] # Splits 2x!! :(
             print user
             [connection['body'].put("data: "+msg+"\n\n")
              for connection in connections if connection['user'] == user]

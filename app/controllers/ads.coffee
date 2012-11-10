@@ -11,25 +11,29 @@ class Ads extends Spine.Controller
 
     @map = new Map (el: $("#map-holder"))
 
-    @categories = new Categories(el: $("#categories"))
+    #@categories = new Categories(el: $("#categories"))
 
     Spine.bind 'global:fetchAds', @queryForAds
     @map.bind "search", @queryForAds # replace with global?
-    @categories.bind "new:ad", @createAd
+    #@categories.bind "new:ad", @createAd
     @append @map, #@categories
 
 
 
   getData: =>
-    latlng = @map.map.getBounds()
-    q = @categories.searchfield.val()
+    #latlng = @map.map.getBounds()
+    #q = @categories.searchfield.val()
+    #data =
+    #  nelat: latlng._northEast['lat']
+    #  nelng: latlng._northEast['lng']
+    #  swlat: latlng._southWest['lat']
+    #  swlng: latlng._southWest['lng']
+      #categories: @categories.represent()
+      #q: q
+    #data
     data =
-      nelat: latlng._northEast['lat']
-      nelng: latlng._northEast['lng']
-      swlat: latlng._southWest['lat']
-      swlng: latlng._southWest['lng']
-      categories: @categories.represent()
-      q: q
+      lat: Spine.massforstroelse.currentLocation.lat
+      lng: Spine.massforstroelse.currentLocation.lng
     data
 
 

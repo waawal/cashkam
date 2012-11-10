@@ -61,9 +61,22 @@ class Map extends Spine.Controller
   checkIfFetching: (marker, action="show") => # is this working???
     unless @fetching
       if action is "show"
+        #@oldCenter = @map.getCenter()
+        #@oldZoomLevel = @map.getZoom()
+        #@log Spine.massforstroelse.currentLocation, marker.getLatLng()
+        @map.markersLayer.clearLayers()
+        bounds =  new L.LatLngBounds(Spine.massforstroelse.currentLocation, marker.getLatLng())
+        #bounds.pad(10000)
+        @map.fitBounds(bounds)
+        #@map.on "moveend", =>
         @map.markersLayer.addLayer(marker)
+          #@map.off("moveend") # Warning - removes all moveend listeners
       else
-        @map.markersLayer.removeLayer(marker)
+        #@map.setView(@oldCenter, @oldZoomLevel)
+
+        #@map.markersLayer.removeLayer(marker) TODO: check why it doesnt work after implementing moveend
+        @map.markersLayer.clearLayers()
+
   flipMap: (event) =>
     if $('#flip').hasClass('active')
       $('#flip').removeClass('active')
