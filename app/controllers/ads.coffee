@@ -52,8 +52,8 @@ class Ads extends Spine.Controller
   queryForAds:  =>
     #Spine.trigger('global:new-search')
     if Spine.massforstroelse.currentLocation
-      data = @getData()
       Ad.deleteAll()
+      data = @getData()
       Ad.fetch(
         processData:true
         data:data
