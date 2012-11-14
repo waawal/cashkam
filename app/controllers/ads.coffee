@@ -20,7 +20,7 @@ class Ads extends Spine.Controller
 
 
 
-  getData: =>
+  getData: ->
     #latlng = @map.map.getBounds()
     #q = @categories.searchfield.val()
     #data =
@@ -31,10 +31,11 @@ class Ads extends Spine.Controller
       #categories: @categories.represent()
       #q: q
     #data
+    index = Ad.count()
     data =
       lat: Spine.massforstroelse.currentLocation.lat
       lng: Spine.massforstroelse.currentLocation.lng
-      i: Ad.count()
+      i: index
     data
 
 

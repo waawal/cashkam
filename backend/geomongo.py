@@ -42,6 +42,7 @@ def get_ads(latlng, index):
     if not index:
         dbresult = db.places.find({"loc": {"$near": latlng}}).limit(ADS_PER_REQ)
         for rec in dbresult:
+            print rec
             result.append({'id': str(rec['_id']),
                            'text': rec['text'],
                            'media': rec['media'],
@@ -51,6 +52,7 @@ def get_ads(latlng, index):
         limit = index + ADS_PER_REQ
         dbresult = db.places.find({"loc": {"$near": latlng}}).limit(ADS_PER_REQ)
         for rec in islice(dbresult, index, limit):
+            print rec
             result.append({'id': str(rec['_id']),
                                  'text': rec['text'],
                                  'media': rec['media'],
