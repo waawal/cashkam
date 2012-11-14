@@ -45,10 +45,10 @@ def get_ads(latlng, index):
         dbresult = db.command(SON([('geoNear', 'places'), ('near', latlng), ('num', limit), ('spherical', 'true'), ('uniqueDocs', True)]))
         for rec in dbresult['results']:
             print "first recs"
-            result.append({'id': str(rec['_id']),
-                           'text': rec['text'],
-                           'media': rec['media'],
-                           'latlng': rec['loc'],
+            result.append({'id': str(rec['obj']['_id']),
+                           'text': rec['obj']['text'],
+                           'media': rec['obj']['media'],
+                           'latlng': rec['obj']['loc'],
                           })
     else:
         limit = index + ADS_PER_REQ
@@ -57,9 +57,9 @@ def get_ads(latlng, index):
         for rec in islice(dbresult['results'], index, limit):
             print rec
             result.append({'id': str(rec['_id']),
-                                 'text': rec['text'],
-                                 'media': rec['media'],
-                                 'latlng': rec['loc'],
+                                 'text': rec['obj']['text'],
+                                 'media': rec['obj']['media'],
+                                 'latlng': rec['obj']['loc'],
                                 })
     return result
 
