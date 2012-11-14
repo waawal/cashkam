@@ -52,11 +52,12 @@ def get_ads(latlng, index):
                           })
     else:
         limit = index + ADS_PER_REQ
+        latlng = reversed(latlng)
         dbresult = db.command(SON([('geoNear', 'places'), ('near', latlng), ('num', limit), ('spherical', 'true'), ('uniqueDocs', True)]))
         #dbresult = db.places.find({"loc": {"$near": latlng}}).limit(limit)
         for rec in islice(dbresult['results'], index, limit):
             print rec
-            result.append({'id': str(rec['_id']),
+            result.append({'id': str(rec['obj']['_id']),
                                  'text': rec['obj']['text'],
                                  'media': rec['obj']['media'],
                                  'latlng': rec['obj']['loc'],
