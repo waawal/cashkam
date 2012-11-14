@@ -45,7 +45,6 @@ def get_ads(latlng, index):
         #dbresult = db.places.find({"loc": {"$near": latlng}}).limit(ADS_PER_REQ)
         dbresult = db.command(SON([('geoNear', 'places'), ('near', latlng), ('num', limit), ('spherical', 'true'), ('uniqueDocs', True)]))
         for rec in dbresult['results']:
-            print "first recs"
             result.append({'id': str(rec['obj']['_id']),
                            'text': rec['obj']['text'],
                            'media': rec['obj']['media'],
@@ -57,7 +56,6 @@ def get_ads(latlng, index):
         dbresult = db.command(SON([('geoNear', 'places'), ('near', latlng), ('num', limit), ('spherical', 'true'), ('uniqueDocs', True)]))
         #dbresult = db.places.find({"loc": {"$near": latlng}}).limit(limit)
         for rec in islice(dbresult['results'], index, limit):
-            print rec
             result.append({'id': str(rec['obj']['_id']),
                                  'text': rec['obj']['text'],
                                  'media': rec['obj']['media'],
