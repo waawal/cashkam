@@ -150,7 +150,7 @@ class Map extends Spine.Controller
     @map.meMarker = new L.marker(@location,
       icon: @map.meicon
       clickable: true
-      title: "You!"
+      title: "Me!"
       draggable: true
       )
     @map.meMarker.on 'dragend', (e) =>

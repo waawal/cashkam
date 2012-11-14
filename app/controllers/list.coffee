@@ -69,6 +69,7 @@ class List extends Spine.Controller
       #@maincontent.masonry('reloadItems')
       #@maincontent.masonry('reload')
 
+
   addOne: (item) =>
     if item
       listitem = new ListItem(item: item)
@@ -88,12 +89,13 @@ class List extends Spine.Controller
   addAll: =>
     #@maincontent.empty()
     #@maincontent.masonry('reload')
-    @appendOne(ad) for ad in Ad.all()
+    @appendOne(ad) for ad in Ad.all()[Ad.count() - 30..]
     #ads = [@maincontent.append(@addOne(ad).$el) for ad in Ad.all()]
     #@log @maincontent
     #@log ads
     @maincontent.masonry( 'reload' )
     @maincontent.waypoint @wayPointOpts
+    
     #@maincontent.imagesLoaded =>
     #  @maincontent.masonry('reload')
       
