@@ -1,4 +1,3 @@
-from pprint import pprint
 from itertools import islice
 
 from gevent import monkey; monkey.patch_all()
@@ -38,11 +37,11 @@ def post_ad(media, lat, lng, category, text=None):
 #    return result
 
 def get_ads(latlng, index):
+    result = []
+
     if not index:
         dbresult = db.places.find({"loc": {"$near": latlng}}).limit(ADS_PER_REQ)
-        result = []
         for rec in dbresult:
-            #pprint(rec)
             result.append({'id': str(rec['_id']),
                            'text': rec['text'],
                            'media': rec['media'],
