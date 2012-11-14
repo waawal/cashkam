@@ -9,10 +9,10 @@
     <div class="image-footer">
 
       <div class="pull-right">
-        <i class="icon-info-sign icon-white"></i>
+        <i class="icon-info-sign icon-white img-rounded glow"></i>
       </div>
 
-      <div class="pull-left">
+      <div class="pull-left distance-box">
         <span>
           <i class="icon-map-marker icon-white"></i>
           <span class="distance">
@@ -24,14 +24,14 @@
     </div>
 </div>
   <div class="details-top">
-    <i class="icon-tag"></i> Interior Design
+    <i class="icon-user"></i> mattebopez
   </div>
 
   <div class="description">
     <%= @text %>
   </div>
-
-  <div class="details-bottom">
+<!--
+  <div class="details-bottom pull-right">
     <a class="btn btn-small" href="#"><i class="icon-comment"></i></a>
   </div>
-  
+-->

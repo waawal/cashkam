@@ -12,7 +12,7 @@ class ListItem extends Spine.Controller
     #'.icon-info-sign': 'info'
 
   events:
-    "click": "addMarker"
+    "click .distance-box": "addMarker"
     #"mouseleave": "removeMarker"
 
   # Bind events to the record
@@ -27,7 +27,7 @@ class ListItem extends Spine.Controller
   # Render an element
   render: (item) =>
     @item = item if item
-    @item.distance = distance = Math.round(Number(@point.distanceTo(Spine.massforstroelse.currentLocation))/1000) + " km"
+    @item.distance = distance = Math.round(Number(@point.distanceTo(Spine.massforstroelse.currentLocation))/1000)
     @html(@template(@item))
     @
 
@@ -40,7 +40,7 @@ class ListItem extends Spine.Controller
 
   # Picked up by map Controller    WARNING - Global Events!
   addMarker: =>
-    @marker = new L.Marker(@item.latlng)
+    @marker = new L.Marker(@item.latlng, clickable: false)
     Spine.trigger('showMarker', @marker)
     #@log "addMarker"
   removeMarker: =>
@@ -50,7 +50,8 @@ class ListItem extends Spine.Controller
   
   updateDistance: (newPosition) =>
     latlng = newPosition.target.dragging._marker._latlng
-    distance = Math.round(Number(@point.distanceTo(latlng))/1000) + " km"
-    @distance.html distance
+    #distance = Math.round(Number(@point.distanceTo(latlng))/1000) + " km"
+    distance = Math.round(Number(@point.distanceTo(latlng))/1000)#@point.distanceTo(latlng)
+    @distance.html distance + " km"
 
 module.exports = ListItem

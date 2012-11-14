@@ -1,4 +1,5 @@
 from pprint import pprint
+from itertools import islice
 
 from gevent import monkey; monkey.patch_all()
 from pymongo import Connection, GEO2D
@@ -7,6 +8,7 @@ db = Connection().geo_example
 db.places.create_index([("loc", GEO2D)])
 
 EARTH_RADIUS = 6378.0
+ADS_PER_REQ = 30
 
 def post_ad(media, lat, lng, category, text=None):
     result = str(db.places.insert({"media": media, "loc": [lat, lng], "text": text, "category": category}))
@@ -37,7 +39,7 @@ def post_ad(media, lat, lng, category, text=None):
 
 def get_ads(latlng, index):
     if not index:
-        dbresult = db.places.find({"loc": {"$near": latlng}}).limit(30)
+        dbresult = db.places.find({"loc": {"$near": latlng}}).limit(ADS_PER_REQ)
         result = []
         for rec in dbresult:
             #pprint(rec)
@@ -46,5 +48,12 @@ def get_ads(latlng, index):
                            'media': rec['media'],
                            'latlng': rec['loc'],
                           })
-        return result
-    # implement with islice???????
+    else:
+      limit = index + ADS_PER_REQ
+      for rec in islice(dbresult, index, limit):
+        result.append({'id': str(rec['_id']),
+                             'text': rec['text'],
+                             'media': rec['media'],
+                             'latlng': rec['loc'],
+                            })
+    return result

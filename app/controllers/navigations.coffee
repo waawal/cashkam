@@ -17,12 +17,12 @@ class Navigations extends Spine.Controller
           
         <ul class="nav">
           <li id="flip"><a title="Toggle Map/Menu"><i class="icon-list"></i> Menu</a></li>
-          <li><a title="Toggle Map/Menu"><i class="icon-th"></i> Map</a></li>
+          <!-- <li><a title="Toggle Map/Menu"><i class="icon-th"></i> Map</a></li>
           <li id="fat-menu" class="dropdown">
             <a id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown" title="Settings"><i class="icon-wrench"></i> Settings <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
               <li><a tabindex="-1">Notifications</a></li>
-            </ul>
+            </ul> -->
         </ul>
 
         <ul class="nav pull-right">
@@ -31,7 +31,7 @@ class Navigations extends Spine.Controller
           <li class="divider-vertical"></li>
 
           <li id="fat-menu" class="dropdown">
-            <a id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown" title="Settings"><i class="icon-user"></i> Username <span class="caret"></span></a>
+            <a id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown" title="Settings"><i class="icon-user"></i> malbaho <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
               <li><a tabindex="-1">My Ads</a></li>
               <li><a tabindex="-1">My Lists</a></li>

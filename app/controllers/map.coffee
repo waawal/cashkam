@@ -29,7 +29,7 @@ class Map extends Spine.Controller
     @mapBack.html '''
     <ul class="nav nav-list" id="nav-list">
       <li class="nav-header">Ad Browser</li>
-      <li class="active"><a><i class="icon-globe"></i> Ad Flow</a></li>
+      <li class="active"><a><i class="icon-globe"></i> Nearby</a></li>
       <li><a><i class="icon-search"></i> Search</a></li>
       <li class="nav-header">Me</li>
       <li><a><i class="icon-inbox"></i> Inbox</a></li>

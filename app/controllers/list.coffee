@@ -88,7 +88,7 @@ class List extends Spine.Controller
   addAll: =>
     #@maincontent.empty()
     #@maincontent.masonry('reload')
-    ads = [(@appendOne(ad)) for ad in Ad.all()]
+    @appendOne(ad) for ad in Ad.all()
     #ads = [@maincontent.append(@addOne(ad).$el) for ad in Ad.all()]
     #@log @maincontent
     #@log ads

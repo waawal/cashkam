@@ -104,9 +104,24 @@ li
     background #fff
     margin 10px
     width 200px
-    background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
-    box-shadow 2px 2px 1px rgba(0,0,0,0.1)
+    //background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
+    box-shadow 2px 2px 1px rgba(0,0,0,0.2)
     border 1px solid #DEDEDE
+.distance-box
+  //padding-top: 5px
+  //padding-bottom: 5px
+  cursor: crosshair
+
+.glow
+  cursor: pointer
+  border: 0px
+  /*Transition*/
+  -webkit-transition: all 0.5s ease; // better done in function?
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+.glow:hover
+  box-shadow 0px 0px 10px rgba(255,255,255,0.9), inset 0px 0px 30px rgba(255,255,255,0.6)
+
 .description
   
   font-size 18px
@@ -131,7 +146,7 @@ li
     border-radius 2px
     display block
 .image-header
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.90)
+  //text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.90)
   border-radius 2px
   color: #fff
   position: absolute
@@ -141,9 +156,9 @@ li
   height: 60px
   padding: 8px
   vbg-gradient(rgba(0, 0, 0, 255), rgba(0, 0, 0, 0))
-  font-size 10px
+  font-size 12px
   line-height 12px
-  //opacity 0.4
+  opacity 0.6
 
   background: -moz-linear-gradient(top,  rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.37) 53%, rgba(0,0,0,0) 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.58)), color-stop(53%,rgba(0,0,0,0.37)), color-stop(100%,rgba(0,0,0,0)));

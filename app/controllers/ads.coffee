@@ -13,7 +13,7 @@ class Ads extends Spine.Controller
 
     #@categories = new Categories(el: $("#categories"))
 
-    #Spine.bind 'global:fetchAds', @queryForAds
+    Spine.bind 'global:fetchAds', @queryForMoreAds # from waypoints
     @map.bind "search", @queryForAds # replace with global?
     #@categories.bind "new:ad", @createAd
     @append @map, #@categories
@@ -34,6 +34,7 @@ class Ads extends Spine.Controller
     data =
       lat: Spine.massforstroelse.currentLocation.lat
       lng: Spine.massforstroelse.currentLocation.lng
+      i: Ad.count()
     data
 
 
@@ -47,13 +48,24 @@ class Ads extends Spine.Controller
       )
 
 
-  queryForAds: =>
+  queryForAds:  =>
     #Spine.trigger('global:new-search')
-    data = @getData()
-    Ad.deleteAll() #invalidate :-/
-    Ad.fetch(
-      processData:true
-      data:data
-      )
-    
+    if Spine.massforstroelse.currentLocation
+      data = @getData()
+      Ad.deleteAll()
+      Ad.fetch(
+        processData:true
+        data:data
+        )
+
+  queryForMoreAds: =>
+    #Spine.trigger('global:new-search')
+    if Spine.massforstroelse.currentLocation
+      data = @getData()
+      Ad.fetch(
+        processData:true
+        data:data
+        )
+
+
 module.exports = Ads
