@@ -12,6 +12,19 @@ import geomongo
 
 app = Bottle()
 
+import itsdangerous
+s = URLSafeSerializer('secret-key')
+#s = itsdangerous.TimestampSigner('secret-key') # should check env
+MAX_AGE = 60 * 60 * 48 // Two days
+
+def check_auth(auth, max_age=MAX_AGE):
+    try:
+        return s.loads(auth)
+        #decoded_payload = s.unsign(auth, max_age=max_age)
+    #except BadSignature, e:
+    except:
+        return False
+
 ### CORS Implementation
 
 @app.hook('after_request')
@@ -55,11 +68,24 @@ def get_ad(id):
 def get_users():
     if request.method == 'OPTIONS':
         return {}
+
+
+    auth = request.get_cookie('auth')
+    if auth:
+        user = check_auth(auth)
+        if user:
+            return json.dumps([{'name': user, 'likes': [], 'ads': []}])
+        else:
+            response.delete_cookie('auth')
+            response.status = "403 Login Failed"
+            return json.dumps({'message': "Login Failed"})
+
+
     email = request.query.get('email')
     password = request.query.get('password')
     print email, password
     if email == "a@a.a" and password == "pass":
-        response.set_cookie('user', 'daniel', path="/")
+        response.set_cookie('auth',  s.dumps(email), path="/")
         return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
     else:
         response.status = "403 Login Failed"

@@ -46,6 +46,8 @@ class Ads extends Spine.Controller
       Ad.fetch(
         processData:true
         data:data
+        xhrFields:
+          withCredentials: true
         )
 
   queryForMoreAds: =>
@@ -54,6 +56,8 @@ class Ads extends Spine.Controller
       Ad.fetch(
         processData:true
         data:data
+        xhrFields:
+          withCredentials: true
         )
 
 
