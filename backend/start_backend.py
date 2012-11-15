@@ -124,9 +124,7 @@ def post_user(id):
 
 @app.route('/users', method=['POST'])
 def post_users():
-    pprint(request.json)
-    pprint(request.params.keys())
-    dbrequest = json.loads(request.params.keys()[0])
+    dbrequest = request.json
     if 'id' in dbrequest:
         del dbrequest['id']
     result = db.key_store.post_auth(dbrequest['email'], dbrequest['password'])
