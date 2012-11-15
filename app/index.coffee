@@ -4,6 +4,7 @@ Ads = require 'controllers/ads'
 List = require 'controllers/list'
 Ad = require 'models/ad'
 User = require 'models/user'
+Users = require 'controllers/users'
 $ = Spine.$
 require 'lib/blur'
 
@@ -18,6 +19,7 @@ class App extends Spine.Controller
     @append @ads, @list
     @ad = Ad
     @user = User
+    @users = Users
 
 
     $('#myModal').modal
@@ -36,5 +38,7 @@ class App extends Spine.Controller
       Spine.massforstroelse.currentLocation = newPosition
     Spine.bind 'global:logIn', =>
       @log "Log in now!"
+    Spine.bind 'global:loggedIn', =>
+      @log "Logged in!"
 
 module.exports = App

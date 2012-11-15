@@ -24,6 +24,7 @@ def enable_cors():
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = headers
     response['Access-Control-Max-Age'] = '86400'
+    response['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Allow-Origin'] = request.get_header('Origin', default="*")
 
 @app.route('/ads', method=['OPTIONS', 'GET'])
