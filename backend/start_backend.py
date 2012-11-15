@@ -59,7 +59,7 @@ def get_users():
     password = request.query.get('password')
     print email, password
     if email == "a@a.a" and password == "pass":
-        response.set_cookie('user', 'daniel')
+        response.set_cookie('user', 'daniel', path="/")
         return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
     else:
         response.status = "403 Login Failed"
