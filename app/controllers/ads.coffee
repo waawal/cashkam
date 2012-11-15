@@ -21,16 +21,6 @@ class Ads extends Spine.Controller
 
 
   getData: ->
-    #latlng = @map.map.getBounds()
-    #q = @categories.searchfield.val()
-    #data =
-    #  nelat: latlng._northEast['lat']
-    #  nelng: latlng._northEast['lng']
-    #  swlat: latlng._southWest['lat']
-    #  swlng: latlng._southWest['lng']
-      #categories: @categories.represent()
-      #q: q
-    #data
     index = Ad.count()
     data =
       lat: Spine.massforstroelse.currentLocation.lat
@@ -50,7 +40,6 @@ class Ads extends Spine.Controller
 
 
   queryForAds:  =>
-    #Spine.trigger('global:new-search')
     if Spine.massforstroelse.currentLocation
       Ad.deleteAll()
       data = @getData()
@@ -60,7 +49,6 @@ class Ads extends Spine.Controller
         )
 
   queryForMoreAds: =>
-    #Spine.trigger('global:new-search')
     if Spine.massforstroelse.currentLocation
       data = @getData()
       Ad.fetch(
