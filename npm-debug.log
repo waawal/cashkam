@@ -1,0 +1,46 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/0.8.10/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   '-g',
+1 verbose cli   'install',
+1 verbose cli   'spineapp' ]
+2 info using npm@1.1.62
+3 info using node@v0.8.10
+4 verbose read json /usr/local/share/npm/lib/package.json
+5 verbose read json /usr/local/share/npm/lib/package.json
+6 verbose cache add [ 'spineapp', null ]
+7 silly cache add name=undefined spec="spineapp" args=["spineapp",null]
+8 verbose parsed url { pathname: 'spineapp', path: 'spineapp', href: 'spineapp' }
+9 silly lockFile 91922892-spineapp spineapp
+10 verbose lock spineapp /Users/user/.npm/91922892-spineapp.lock
+11 silly lockFile 91922892-spineapp spineapp
+12 verbose addNamed [ 'spineapp', '' ]
+13 verbose addNamed [ null, '' ]
+14 silly lockFile 7a9dd59d-spineapp spineapp@
+15 verbose lock spineapp@ /Users/user/.npm/7a9dd59d-spineapp.lock
+16 silly addNameRange { name: 'spineapp', range: '', hasData: false }
+17 verbose url raw spineapp
+18 verbose url resolving [ 'https://registry.npmjs.org/', './spineapp' ]
+19 verbose url resolved https://registry.npmjs.org/spineapp
+20 info trying registry request attempt 1 at 13:19:49
+21 http GET https://registry.npmjs.org/spineapp
+22 http 404 https://registry.npmjs.org/spineapp
+23 silly registry.get cb [ 404,
+23 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+23 silly registry.get     date: 'Tue, 23 Oct 2012 11:19:48 GMT',
+23 silly registry.get     'content-type': 'application/json',
+23 silly registry.get     'content-length': '52',
+23 silly registry.get     'cache-control': 'must-revalidate' } ]
+24 silly lockFile 7a9dd59d-spineapp spineapp@
+25 error 404 'spineapp' is not in the npm registry.
+25 error 404 You should bug the author to publish it
+25 error 404
+25 error 404 Note that you can also install from a
+25 error 404 tarball, folder, or http url, or git url.
+26 error System Darwin 12.2.0
+27 error command "/usr/local/Cellar/node/0.8.10/bin/node" "/usr/local/bin/npm" "-g" "install" "spineapp"
+28 error cwd /Users/user/dev/cashkam
+29 error node -v v0.8.10
+30 error npm -v 1.1.62
+31 error code E404
+32 verbose exit [ 1, true ]

@@ -3,6 +3,7 @@ Spine = require('spine')
 Ads = require 'controllers/ads'
 List = require 'controllers/list'
 Ad = require 'models/ad'
+User = require 'models/user'
 $ = Spine.$
 require 'lib/blur'
 
@@ -16,6 +17,7 @@ class App extends Spine.Controller
     @list = new List(el: $("#contentwrapper"))
     @append @ads, @list
     @ad = Ad
+    @user = User
 
 
     $('#myModal').modal
@@ -32,5 +34,7 @@ class App extends Spine.Controller
     # Global listeners
     Spine.bind 'global:position-changed', (newPosition) =>
       Spine.massforstroelse.currentLocation = newPosition
+    Spine.bind 'global:logIn' =>
+      @log "Log in now!"
 
 module.exports = App

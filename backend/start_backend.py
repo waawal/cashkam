@@ -6,7 +6,7 @@ import json
 
 from gevent import monkey; monkey.patch_all()
 
-from bottle import Bottle, hook, request, response, route, run, get, post, put
+from bottle import Bottle, hook, request, response, route, run, get, post, put HTTPError
 
 import geomongo
 
@@ -48,5 +48,17 @@ def post_ad():
 def get_ad(id):
     return id
 
+@app.route('/users', method=['GET'])
+def get_users():
+    email = request.query.get('email')
+    password = request.query.get('password')
+    if email == "a@a.a" and password == "pass":
+        return [{'name': 'daniel', 'likes': [], 'ads': []}]
+    else:
+        raise HTTPError(403)
+
+@app.route('/users', method=['POST'])
+def post_users():
+    pass
 
 #run(app, host='0.0.0.0', port=int(sys.argv[1]), server='gevent')
