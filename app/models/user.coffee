@@ -8,6 +8,7 @@ class User extends Spine.Model
     super(processData:true, data: data)
 
   @bind "ajaxError", (record, xhr, settings, error) =>
+      console.log a for a in [record, xhr, settings, error]
       #status is 0 if 403 sent over CORS :-/
       Spine.massforstroelse.loggedIn = false
       Spine.trigger "global:logIn"
