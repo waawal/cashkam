@@ -101,7 +101,7 @@ def get_users():
     if auth:
         user = check_auth(auth)
         if user:
-            return json.dumps([{'name': user, 'likes': [], 'ads': []}]) #override with real data
+            return json.dumps([{id: user, 'email': user, 'likes': [], 'ads': []}]) #override with real data
         else:
             response.delete_cookie('auth')
             response.status = "403 Login Failed"

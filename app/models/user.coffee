@@ -1,30 +1,43 @@
 Spine = require('spine')
+$ = Spine.$
 
 class User extends Spine.Model
-  @configure 'User', 'name', 'likes', 'ads'
+  @configure 'User', 'name', 'email', 'ads'
   @extend Spine.Model.Ajax
+
   @fetch: (params) ->
     if params
-      data = {email: params.email, password: params.password}
       super
         processData:true
-        data: data
+        data: params
         xhrFields:
           withCredentials: true
     else
       super
         xhrFields:
           withCredentials: true
-
+  # Events # # #
   @bind "ajaxError", (record, xhr, settings, error) =>
       console.log a for a in [record, xhr, settings, error]
-      #status is 0 if 403 sent over CORS :-/
-      Spine.massforstroelse.loggedIn = false
-      Spine.trigger "global:logIn"
+      if xhr.status is 401 or xhr.status is 403
+        Spine.massforstroelse.loggedIn = false
+        Spine.trigger "global:logIn"
       # Invalid response...
   @bind "ajaxSuccess", (status, xhr) =>
-    unless Spine.massforstroelse.loggedIn
+    unless Spine.massforstroelse.loggedIn and @all()
       Spine.massforstroelse.loggedIn = true
       Spine.trigger "global:loggedIn"
+
+  @login = (email, password) =>
+    @fetch({email: email, password: password})
+
+  @createNewUser = (username, email, password) =>
+    data = {username: username, email: email, password: password}
+    url = @url()
+    $.post url,
+      data: data
+      processData: true
+      xhrFields:
+          withCredentials: true
 
 module.exports = User
