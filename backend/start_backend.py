@@ -125,7 +125,7 @@ def post_user(id):
 @app.route('/users', method=['POST'])
 def post_users():
     pprint(request.params)
-    pprint(request.params.items())
+    pprint(request.params.keys())
     dbrequest = json.loads(request.params.keys()[0])
     if 'id' in dbrequest:
         del dbrequest['id']
