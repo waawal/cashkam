@@ -27,10 +27,6 @@ def enable_cors():
     response['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Allow-Origin'] = request.get_header('Origin', default="*")
 
-@error(403)
-def auth_error(error):
-    enable_cors()
-    return json.dumps({'message': "Login Failed"})
 
 
 @app.route('/ads', method=['OPTIONS', 'GET'])
@@ -65,7 +61,8 @@ def get_users():
     if email == "a@a.a" and password == "pass":
         return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
     else:
-        abort(403)
+        response.status = "403 Login Failed"
+        return json.dumps({'message': "Login Failed"})
 
 @app.route('/users', method=['POST'])
 def post_users():
