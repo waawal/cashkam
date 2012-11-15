@@ -13,7 +13,7 @@ import geomongo
 app = Bottle()
 
 import itsdangerous
-s = URLSafeSerializer('secret-key')
+s = itsdangerous.URLSafeSerializer('secret-key')
 #s = itsdangerous.TimestampSigner('secret-key') # should check env
 MAX_AGE = 60 * 60 * 48 #Two days
 
