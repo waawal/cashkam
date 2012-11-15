@@ -54,6 +54,7 @@ def get_users():
         return {}
     email = request.query.get('email')
     password = request.query.get('password')
+    print email, password
     if email == "a@a.a" and password == "pass":
         return [{'name': 'daniel', 'likes': [], 'ads': []}]
     else:

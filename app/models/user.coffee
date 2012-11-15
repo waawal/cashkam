@@ -14,6 +14,6 @@ class User extends Spine.Model
       Spine.trigger "global:loggedIn"
   @fetch: (params) ->
     data = {email: params.email, password: params.password}
-    super(data)
+    super(processData:true, data: data)
 
 module.exports = User
