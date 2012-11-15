@@ -2,7 +2,6 @@
 import sys
 import os
 import json
-from pprint import pprint
 
 
 from gevent import monkey; monkey.patch_all()
@@ -18,9 +17,11 @@ app = Bottle()
 @app.hook('after_request')
 def enable_cors():
     """ Appends CORS-related data to response headers """
-    headers = 'origin, accept, Content-Type, X-Requested-With, X-CSRF-Token'
+
+    headers = 'origin, accept, host, Content-Type, X-Requested-With, X-CSRF-Token'
+
     response.content_type = "application/json"
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = headers
     response['Access-Control-Max-Age'] = '86400'
     response.headers['Access-Control-Allow-Origin'] = request.get_header('Origin', default="*")
