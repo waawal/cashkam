@@ -15,7 +15,7 @@ app = Bottle()
 import itsdangerous
 s = URLSafeSerializer('secret-key')
 #s = itsdangerous.TimestampSigner('secret-key') # should check env
-MAX_AGE = 60 * 60 * 48 // Two days
+MAX_AGE = 60 * 60 * 48 #Two days
 
 def check_auth(auth, max_age=MAX_AGE):
     try:
