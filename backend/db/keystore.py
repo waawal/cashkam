@@ -6,7 +6,7 @@ import json
 
 import redis
 
-from redistogo import r as con # HöHö
+from redistogo import r as con # override later
 
 AUTH_PREFIX = "auth"
 USERS_PREFIX = "users"
