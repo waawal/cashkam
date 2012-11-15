@@ -30,7 +30,7 @@ def enable_cors():
 @error(403)
 def auth_error():
     enable_cors()
-    return HTTPResponse(403, json.dumps({'message': "Login Failed"}))
+    return json.dumps({'message': "Login Failed"})
 
 
 @app.route('/ads', method=['OPTIONS', 'GET'])
