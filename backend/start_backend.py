@@ -129,7 +129,8 @@ def post_users():
         del dbrequest['id']
     result = db.key_store.post_auth(dbrequest['email'], dbrequest['password'])
     if result:
-        get_users()
+        response.set_cookie('auth', s.dumps(dbrequest['email']), path="/")
+        return json.dumps([{'email': dbrequest['email'], 'likes': [], 'ads': []}]) #override with real data
     else:
         response.status = "409 Username already in use."
         return json.dumps({'message': "Username already in use."})
