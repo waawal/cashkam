@@ -2,7 +2,7 @@
 import sys
 import os
 import json
-
+from pprint import pprint
 
 from gevent import monkey; monkey.patch_all()
 from bottle import Bottle, hook, request, response, route, run, get, post, put, abort, error
@@ -124,6 +124,8 @@ def post_user(id):
 
 @app.route('/users', method=['POST'])
 def post_users():
+    pprint(request.params)
+    pprint(request.params.items())
     dbrequest = json.loads(request.params.keys()[0])
     if 'id' in dbrequest:
         del dbrequest['id']
