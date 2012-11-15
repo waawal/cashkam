@@ -56,7 +56,7 @@ def get_users():
     password = request.query.get('password')
     print email, password
     if email == "a@a.a" and password == "pass":
-        return [{'name': 'daniel', 'likes': [], 'ads': []}]
+        return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
     else:
         raise HTTPError(403)
 
