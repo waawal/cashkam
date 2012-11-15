@@ -6,7 +6,7 @@ import json
 
 from gevent import monkey; monkey.patch_all()
 
-from bottle import Bottle, hook, request, response, route, run, get, post, put, HTTPError
+from bottle import Bottle, hook, request, response, route, run, get, post, put, HTTPError, HTTPResponse, error
 
 import geomongo
 
@@ -26,6 +26,12 @@ def enable_cors():
     response['Access-Control-Max-Age'] = '86400'
     response['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Allow-Origin'] = request.get_header('Origin', default="*")
+
+@error(403)
+def auth_error():
+    enable_cors()
+    return HTTPResponse(403, json.dumps({'message': "Login Failed"})
+
 
 @app.route('/ads', method=['OPTIONS', 'GET'])
 def get_ads():
@@ -59,7 +65,7 @@ def get_users():
     if email == "a@a.a" and password == "pass":
         return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
     else:
-        raise HTTPError(403, json.dumps({'message': "Login Failed"}))
+        raise HTTPError
 
 @app.route('/users', method=['POST'])
 def post_users():
