@@ -65,7 +65,7 @@ def get_users():
     if email == "a@a.a" and password == "pass":
         return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
     else:
-        raise HTTPError
+        raise HTTPError(403)
 
 @app.route('/users', method=['POST'])
 def post_users():
