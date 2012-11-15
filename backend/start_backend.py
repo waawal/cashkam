@@ -6,7 +6,7 @@ import json
 
 from gevent import monkey; monkey.patch_all()
 
-from bottle import Bottle, hook, request, response, route, run, get, post, put HTTPError
+from bottle import Bottle, hook, request, response, route, run, get, post, put, HTTPError
 
 import geomongo
 
