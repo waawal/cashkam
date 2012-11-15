@@ -11,7 +11,8 @@ def get_auth():
     if result:
         return result
     else:
-        raise HTTPError(401, "Authentication Failed.")
+        response.status = "403 Login Failed"
+        return json.dumps({'message': "Login Failed"})
 
 def post_auth():
     r = validate_queries(['name','password'])
@@ -19,7 +20,8 @@ def post_auth():
     if result: # TODO: Should create a new User()
         return result
     else:
-        raise HTTPError(409, "Username already in use.")
+        response.status = "409 Username already in use."
+        return json.dumps({'message': "Username already in use."})
 
 @requires_auth
 def put_auth(name, authed):

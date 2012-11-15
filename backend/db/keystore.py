@@ -6,12 +6,10 @@ import json
 
 import redis
 
+from redistogo import r as con # HöHö
 
 AUTH_PREFIX = "auth"
 USERS_PREFIX = "users"
-
-pool = redis.ConnectionPool()
-con = redis.Redis(connection_pool=pool)
 
 def auth_hash(username, password):
     """ Calculates the hash and returns it """

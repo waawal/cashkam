@@ -5,10 +5,9 @@ import json
 
 
 from gevent import monkey; monkey.patch_all()
-
 from bottle import Bottle, hook, request, response, route, run, get, post, put, abort, error
-
 import geomongo
+from db import key_store
 
 app = Bottle()
 
@@ -16,6 +15,34 @@ import itsdangerous
 s = itsdangerous.URLSafeSerializer('secret-key')
 #s = itsdangerous.TimestampSigner('secret-key') # should check env
 MAX_AGE = 60 * 60 * 48 #Two days
+
+import db
+
+def requires_auth(f):
+    """ Simple decorator checking for `token`in header and returning
+        the username if the callback asked for it. if `token`is missing or
+        invalid, a 401 is raised.
+    """
+    
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        token = request.get_cookie('auth')
+        if not token:
+            response.status = "401 Login Failed"
+            return json.dumps({'message': "Login Failed"})
+        else:
+            username = db.key_store.check_auth(token)
+            if not username:
+                response.status = "401 Login Failed"
+                return json.dumps({'message': "Login Failed"})
+            else:
+                if 'authed' in inspect.getargspec(f)[0]:
+                    kwargs['authed'] = username
+                return f(*args, **kwargs)
+
+    return wrapper
+
+
 
 def check_auth(auth, max_age=MAX_AGE):
     try:
@@ -74,7 +101,7 @@ def get_users():
     if auth:
         user = check_auth(auth)
         if user:
-            return json.dumps([{'name': user, 'likes': [], 'ads': []}])
+            return json.dumps([{'name': user, 'likes': [], 'ads': []}]) #override with real data
         else:
             response.delete_cookie('auth')
             response.status = "403 Login Failed"
@@ -83,16 +110,28 @@ def get_users():
 
     email = request.query.get('email')
     password = request.query.get('password')
-    print email, password
-    if email == "a@a.a" and password == "pass":
-        response.set_cookie('auth',  s.dumps(email), path="/")
-        return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
+    result = db.key_store.get_auth(email, password)
+    if result:
+        response.set_cookie('auth', s.dumps(email), path="/")
+        return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}]) #override with real data
     else:
         response.status = "403 Login Failed"
         return json.dumps({'message': "Login Failed"})
 
+@app.route('/users/:id', method=['POST'])
+def post_user(id):
+    pass
+
 @app.route('/users', method=['POST'])
 def post_users():
-    pass
+    dbrequest = json.loads(request.params.keys()[0])
+    if 'id' in dbrequest:
+        del dbrequest['id']
+    result = db.key_store.post_auth(dbrequest['email'], dbrequest['password'])
+    if result:
+        get_users()
+    else:
+        response.status = "409 Username already in use."
+        return json.dumps({'message': "Username already in use."})
 
 #run(app, host='0.0.0.0', port=int(sys.argv[1]), server='gevent')
