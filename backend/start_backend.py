@@ -6,7 +6,7 @@ import json
 
 from gevent import monkey; monkey.patch_all()
 
-from bottle import Bottle, hook, request, response, route, run, get, post, put, HTTPError, HTTPResponse, error
+from bottle import Bottle, hook, request, response, route, run, get, post, put, abort, error
 
 import geomongo
 
@@ -65,7 +65,7 @@ def get_users():
     if email == "a@a.a" and password == "pass":
         return json.dumps([{'name': 'daniel', 'likes': [], 'ads': []}])
     else:
-        raise HTTPError(403)
+        abort(403)
 
 @app.route('/users', method=['POST'])
 def post_users():
