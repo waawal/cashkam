@@ -28,7 +28,7 @@ def enable_cors():
     response.headers['Access-Control-Allow-Origin'] = request.get_header('Origin', default="*")
 
 @error(403)
-def auth_error():
+def auth_error(error):
     enable_cors()
     return json.dumps({'message': "Login Failed"})
 
