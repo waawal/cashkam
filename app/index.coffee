@@ -34,7 +34,7 @@ class App extends Spine.Controller
     # Global listeners
     Spine.bind 'global:position-changed', (newPosition) =>
       Spine.massforstroelse.currentLocation = newPosition
-    Spine.bind 'global:logIn' =>
+    Spine.bind 'global:logIn', =>
       @log "Log in now!"
 
 module.exports = App

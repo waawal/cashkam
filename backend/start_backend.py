@@ -48,8 +48,10 @@ def post_ad():
 def get_ad(id):
     return id
 
-@app.route('/users', method=['GET'])
+@app.route('/users', method=['GET', 'OPTIONS'])
 def get_users():
+    if request.method == 'OPTIONS':
+        return {}
     email = request.query.get('email')
     password = request.query.get('password')
     if email == "a@a.a" and password == "pass":
