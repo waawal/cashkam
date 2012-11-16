@@ -52,7 +52,7 @@
                 }
 				if ($('head style:contains('+blurredClass+')').length === 0) {
 					var cssData = css(blurredClass, settings.radius);
-					console.log(cssData);
+					//console.log(cssData);
                     $(cssData).appendTo('head');
                 }
                 $this.addClass(blurredClass);

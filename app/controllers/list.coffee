@@ -4,9 +4,13 @@ ListItem = require 'controllers/listitem'
 $ = Spine.$
 require('lib/waypoints')
 require 'lib/jquery.masonry.min'
+Manager = require('spine/lib/manager')
 
 class List extends Spine.Controller
 
+  className: "list-wrapper"
+
+  #el: $('#list-wrapper')
 
   elements:
     '#maincontent': 'maincontent'
@@ -15,6 +19,7 @@ class List extends Spine.Controller
     super
     Ad.bind("refresh", @addAll)
     Ad.bind("create",  @appendOne)
+    @html '<div id="maincontent"></div>'
 
     @append @maincontent
 
@@ -25,16 +30,10 @@ class List extends Spine.Controller
     @wayPointOpts =
       offset: ->
         height = ($.waypoints('viewportHeight') - $(this).height())
-        #if height > 6000
-        #  multiplier = 0.95
-        #if height > 12000
-        #  multiplier = 0.97
-        #if height > 24000
-        #  multiplier = 0.99
-        #else
         multiplier = 0.98
         return height * multiplier
       onlyOnScroll: true
+
     @maincontent.waypoint(
       (event, direction) => @infiniteScroll(event, direction)
       @wayPointOpts
@@ -42,10 +41,20 @@ class List extends Spine.Controller
 
     # # # # #
     # Global Events attached to Spine
-    Spine.bind 'refreshList', -> @refreshList
-    Spine.bind 'global:new-search', -> @refreshList
+    #Spine.bind 'refreshList', -> @refreshList
+    #Spine.bind 'global:new-search', -> @refreshList
     # # # # #
 
+  activate: ->
+    @el.addClass("active")
+    @maincontent.masonry( 'destroy' )
+    @maincontent.masonry()
+    @maincontent.waypoint @wayPointOpts
+    @
+  deactivate: ->
+    @maincontent.waypoint "remove"
+    @el.removeClass("active")
+    @
 
   refreshList: (refreshType) =>
     @$el.fadeOut('fast')
@@ -74,7 +83,5 @@ class List extends Spine.Controller
     @appendOne(ad) for ad in Ad.all()[Ad.count() - 30..]
     @maincontent.masonry( 'reload' )
     @maincontent.waypoint @wayPointOpts
-
-
 
 module.exports = List

@@ -1,6 +1,6 @@
 Spine = require('spine')
 L = require ('lib/leaflet')
-Navigations = require ('controllers/navigations')
+
 
 require('lib/jquery-ui')
 require 'lib/gfx'
@@ -9,6 +9,7 @@ require 'lib/easing'
 
 class Map extends Spine.Controller
   #className: "side-map"
+  el: $("#sidebar")
   elements:
     '#map': 'mapbox'
     '#browse-button': 'browseButton'
@@ -41,7 +42,7 @@ class Map extends Spine.Controller
     '''
     
     @map = new @createMap
-    @menuBar = new Navigations
+    
     
     # # # # #
     # Global Events attached to Spine :-( Coming from listitem controller
@@ -51,7 +52,7 @@ class Map extends Spine.Controller
     # # # # #
 
     @categories.hide() # Fix this soon ******
-    @append @mapframe, @browseButton, @menuBar, @categories#, @browseButton
+    @append @mapframe, @browseButton
     $("#map-frame").gfxFlip()
     @fetching = false
     #$('#flip').click (event) =>
@@ -85,7 +86,6 @@ class Map extends Spine.Controller
       $("#flip").addClass("active")
     $("#map-frame").trigger("flip")
     $('#browse').fadeToggle 120
-    @categories.fadeToggle 120
     $(event.target).toggleClass("active")
     #$(event.target).addClass "active"  unless $(event.target).hasClass("active")
     event.preventDefault()

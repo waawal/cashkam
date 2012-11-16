@@ -26,24 +26,24 @@ body
   font-weight 400
   //font-family "Helvetica Neue", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important
 
-// Fix for modals with blur ***
-body.modal-open
-  overflow hidden
+  // Fix for modals with blur ***
+  //body.modal-open
+  //  overflow hidden
+.modal
+  z-index: 20
+  background-image url(data:"image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAADCAIAAABee8vuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB1JREFUeNpi/P79O8PgAyzMzMyD0FlMDIMSAAQYAC22AvZUamhbAAAAAElFTkSuQmCC")
 
 .modal-backdrop, .modal-backdrop.fade
   background-color: white
   opacity: 0.6
-// Fix for modals with blur ***
+  // Fix for modals with blur ***
 
 
 li
   cursor: hand
   cursor: pointer
 
-//For stacks
-.stack > *:not(.active) {
-  display: none
-}
+
 #wrapper
   position: relative
   margin 0
@@ -92,6 +92,11 @@ li
 
 #contentwrapper
   padding 0px 0px 20px 270px
+  //top 50px
+.ad-details
+  top 60px
+  padding: 0px 20px 20px 20px;
+  position: relative
 
 #maincontent
   position: relative
@@ -221,7 +226,7 @@ li
 
 #sidebar
   position fixed 
-  z-index: 100
+  z-index: 20
   display: block
   width 240px
   //height 100%
@@ -304,4 +309,10 @@ li
       -ms-transition: opacity .60s ease-in-out;
        -o-transition: opacity .60s ease-in-out;
           transition: opacity .60s ease-in-out;
+}
+
+
+// Spine
+.stack > *:not(.active) {
+  display: none
 }

@@ -1,6 +1,7 @@
 Spine = require('spine')
 L = require ('lib/leaflet')
 L.Icon.Default.imagePath = 'http://leaflet.cloudmade.com/dist/images/'
+require('spine/lib/route')
 
 class ListItem extends Spine.Controller
   
@@ -13,7 +14,7 @@ class ListItem extends Spine.Controller
 
   events:
     "click .distance-box": "addMarker"
-    #"mouseleave": "removeMarker"
+    "click .icon-info-sign": "showDetails"
 
   # Bind events to the record
   constructor: ->
@@ -37,6 +38,9 @@ class ListItem extends Spine.Controller
   # Called after an element is destroyed
   remove: ->
     @el.remove()
+
+  showDetails: =>
+    @navigate("/ad", @item.id)
 
   # Picked up by map Controller    WARNING - Global Events!
   addMarker: =>
