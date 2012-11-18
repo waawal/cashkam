@@ -124,8 +124,11 @@ class Navigations extends Spine.Controller
 
 
     # Global events
-    Spine.bind 'global:loggedIn', =>
-      @loggedIn()
+    #Spine.bind 'global:loggedIn', =>
+    #  @loggedIn()
+    User.bind 'refresh', =>
+      @user = User.first()
+      @log @user # This works...
     Spine.bind 'global:loggedOut', =>
       @loggedOut()
 
@@ -146,8 +149,9 @@ class Navigations extends Spine.Controller
               <li id="logout"><a tabindex="-1">Log Out</a></li>
             </ul>
     """
-    user = User.first()
-    @username.html user.email
+    #user = User.first()
+    #@username.html @user.email
+    @log @user
   loggedOut: =>
     @userMenu.empty()
     @userMenu.append $loginForm
