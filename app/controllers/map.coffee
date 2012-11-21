@@ -55,9 +55,8 @@ class Map extends Spine.Controller
     @append @mapframe, @browseButton
     $("#map-frame").gfxFlip()
     @fetching = false
-    #$('#flip').click (event) =>
-    #  @flipMap(event)
-      #false
+    
+    @trigger "search"
 
   checkIfFetching: (marker, action="show") => # is this working???
     unless @fetching

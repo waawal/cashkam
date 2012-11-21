@@ -39,11 +39,6 @@ class List extends Spine.Controller
       @wayPointOpts
       )
 
-    # # # # #
-    # Global Events attached to Spine
-    #Spine.bind 'refreshList', -> @refreshList
-    #Spine.bind 'global:new-search', -> @refreshList
-    # # # # #
 
   activate: ->
     @el.addClass("active")

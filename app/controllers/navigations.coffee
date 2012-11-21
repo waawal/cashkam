@@ -100,11 +100,12 @@ class Navigations extends Spine.Controller
     "click #top-messages": "showLoginModal"
     "click #logout": "logOut"
     "click #login": "logIn"
-    "submit form": "fetchUser"
+    #"submit form": "fetchUser"
+    'click #user-menu': 'showLoginModal'
 
   constructor: ->
     super
-    User.fetch()
+    #User.fetch()
 
     @html $navBar
     
@@ -116,7 +117,7 @@ class Navigations extends Spine.Controller
         radius: 5
         persist: true
       $('#sidebar').blurjs
-        radius: 2
+        radius: 3
         persist: true
      #$('#footer-controls').fadeToggle('slow')
     @loginModal.on 'hidden', =>
@@ -154,7 +155,7 @@ class Navigations extends Spine.Controller
     @log @user
   loggedOut: =>
     @userMenu.empty()
-    @userMenu.append $loginForm
+    #@userMenu.append $loginForm
     @userMenu.append '<li id="login"><a title="Log in"><i class="icon-user"></i> Log in</a></li>'
 
   logIn: =>
