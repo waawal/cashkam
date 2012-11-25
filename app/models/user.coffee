@@ -34,7 +34,7 @@ class User extends Spine.Model
       Spine.trigger "global:loggedIn"
 
   @login = (email, password) =>
-    @fetch({email: email, password: password})
+    @fetch({username: email, password: password})
 
   @createNewUser = (username, email, password) =>
     data = {username: username, email: email, password: password}

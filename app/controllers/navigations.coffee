@@ -43,19 +43,20 @@ $loginModal = $("""
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Log in</h3>
   </div>
+  <form class="form-horizontal" name="emailLogin" id="emailLogin">
   <div class="modal-body">
     
-    <form class="form-horizontal">
+    
       <div class="control-group">
         <label class="control-label" for="inputEmail">Email</label>
         <div class="controls">
-          <input type="text" id="inputEmail" placeholder="Email">
+          <input type="text" id="inputEmail" placeholder="Email" name="email">
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="inputPassword">Password</label>
         <div class="controls">
-          <input type="password" id="inputPassword" placeholder="Password">
+          <input type="password" id="inputPassword" placeholder="Password" name="password">
         </div>
       </div>
       <div class="control-group">
@@ -71,9 +72,8 @@ $loginModal = $("""
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <button class="btn btn-primary" type="submit">Log in</button>
-
-  </form>
   </div>
+  </form>
 </div>
 """)
 
@@ -100,7 +100,7 @@ class Navigations extends Spine.Controller
     "click #top-messages": "showLoginModal"
     "click #logout": "logOut"
     "click #login": "logIn"
-    #"submit form": "fetchUser"
+    "submit #emailLogin": "fetchUser"
     'click #user-menu': 'showLoginModal'
 
   constructor: ->
@@ -112,6 +112,9 @@ class Navigations extends Spine.Controller
     $('#login-form').submit (e) => @fetchUser(e)
     @loggedOut()
     @loginModal = $($loginModal).modal backdrop: false, show: false
+
+    @append @loginModal
+
     @loginModal.on 'show', =>
       $('#contentwrapper').blurjs
         radius: 5
@@ -165,6 +168,8 @@ class Navigations extends Spine.Controller
 
   fetchUser: (e) ->
     User.login $('#login-email').val(), $('#login-password').val()
+    @loginModal.modal('toggle')
+    e.preventDefault()
 
   fadeOut: =>
     @el.css('opacity', '0.3')
